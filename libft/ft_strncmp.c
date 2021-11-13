@@ -6,7 +6,22 @@
 /*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 13:07:42 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/08 13:07:43 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/13 20:47:17 by maemi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}

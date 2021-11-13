@@ -6,7 +6,20 @@
 /*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 13:07:55 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/08 13:07:55 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/13 20:14:41 by maemi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	if (*s == c)
+		return (s);
+	while (*s++)
+	{
+		if (*s == c)
+			return (s);
+	}
+	return (NULL);
+}
