@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 15:06:42 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/16 19:37:25 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/16 20:39:17 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 int	ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
