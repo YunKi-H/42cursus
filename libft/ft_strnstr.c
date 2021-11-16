@@ -3,10 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 13:07:46 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/08 13:07:46 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:02:29 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+{
+
+}
