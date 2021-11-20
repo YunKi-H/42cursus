@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/20 14:16:58 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/20 16:52:03 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	**ft_split(char const *s, char c)
 		if (*s != c)
 		{
 			wdlen = ft_wdlen(s, c);
-			result[wdcount] = (char *)malloc(wdlen + 1);
+			result[wdcount] = (char *)malloc(sizeof(char) * (wdlen + 1));
 			if (!result[wdcount])
 				return (ft_freearr(result, wdcount));
 			ft_strlcpy(result[wdcount], s, wdlen + 1);
