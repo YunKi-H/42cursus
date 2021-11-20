@@ -6,11 +6,21 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/19 19:21:30 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/20 14:16:58 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static void	*ft_freearr(char **arr, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size)
+		free(arr[i]);
+	return (NULL);
+}
 
 static int	ft_wdcount(char *s, char c)
 {
@@ -47,7 +57,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	int		wdcount;
-	int		i;
+	int		wdlen;
 
 	result = (char **)malloc(sizeof(char *) * (ft_wdcount(s, c) + 1));
 	if (!result)
@@ -55,18 +65,15 @@ char	**ft_split(char const *s, char c)
 	wdcount = 0;
 	while (*s)
 	{
-		i = 0;
-		if (!(*s == c))
+		if (*s != c)
 		{
-			result[wdcount] = (char *)malloc(ft_wdlen(s, c) + 1);
-			while (!(*(s + i) == c) && *(s + i))
-			{
-				result[wdcount][i] = (s + i);
-				i++;
-			}
-			result[wdcount++][i] = 0;
+			wdlen = ft_wdlen(s, c);
+			result[wdcount] = (char *)malloc(wdlen + 1);
+			if (!result[wdcount])
+				return (ft_freearr(result, wdcount));
+			ft_strlcpy(result[wdcount], s, wdlen + 1);
 		}
-		s += i + 1;
+		s += wdlen + 1;
 	}
 	result[wdcount] = 0;
 	return (result);
