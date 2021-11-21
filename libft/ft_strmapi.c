@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 15:54:24 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/21 17:49:53 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 20:01:34 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 		ret[i] = f(i, s[i]);
 		i++;
 	}
+	ret[i] = 0;
 	return (ret);
 }
