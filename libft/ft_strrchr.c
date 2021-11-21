@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 13:07:49 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/13 20:42:54 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/21 14:30:56 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ char	*ft_strrchr(const char *s, int c)
 		if (*s == c)
 			tmp = s;
 	}
-	return (tmp);
+	return ((char *)tmp);
 }
