@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/20 16:52:03 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 16:04:08 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	*ft_freearr(char **arr, size_t size)
 	return (NULL);
 }
 
-static int	ft_wdcount(char *s, char c)
+static int	ft_wdcount(char const *s, char c)
 {
 	int	index;
 	int	count;
@@ -75,6 +75,6 @@ char	**ft_split(char const *s, char c)
 		}
 		s += wdlen + 1;
 	}
-	result[wdcount] = 0;
+	result[wdcount] = NULL;
 	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 14:21:38 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/20 17:01:57 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 16:00:51 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	ft_digitlen(int n)
 		n /= 10;
 		len++;
 	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
