@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 14:21:38 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/21 16:00:51 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 17:35:44 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,41 @@ static int	ft_digitlen(int n)
 	return (len);
 }
 
+static void	ft_putnbr(char *ret, int n, size_t len)
+{
+	ret[len] = '\0';
+	if (n == 0)
+		ret[--len] = '0';
+	else if (n > 0)
+	{
+		while (n != 0)
+		{
+			ret[--len] = n % 10 + '0';
+			n /= 10;
+		}
+	}
+	else
+	{
+		while (n != 0)
+		{
+			ret[--len] = -1 * (n % 10) + '0';
+			n /= 10;
+		}
+		ret[0] = '-';
+	}
+}
+
 char	*ft_itoa(int n)
 {
 	char	*ret;
 	size_t	len;
 
-	len = ft_digitlen(n) + 1;
+	len = ft_digitlen(n);
 	if (n < 0)
 		len++;
-	ret = (char *)malloc(sizeof(char) * len);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ret)
 		return (NULL);
+	ft_putnbr(ret, n, len);
 	return (ret);
 }
