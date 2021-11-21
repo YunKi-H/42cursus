@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/21 16:10:36 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 16:40:12 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	*ft_freearr(char **arr, size_t size)
 
 	i = 0;
 	while (i < size)
-		free(arr[i]);
+		free(arr[i++]);
+	free(arr);
 	return (NULL);
 }
 
@@ -33,9 +34,9 @@ static int	ft_wdcount(char const *s, char c)
 	{
 		while (s[index] == c)
 			index++;
-		if (s[index] == c)
+		if (s[index] != c)
 		{
-			while (s[index] == c && s[index])
+			while (s[index] != c && s[index])
 				index++;
 			count++;
 		}
@@ -48,7 +49,7 @@ static int	ft_wdlen(char const *s, char c)
 	int	len;
 
 	len = 0;
-	while (s[len] && !(s[len] == c))
+	while (s[len] && s[len] != c)
 		len++;
 	return (len);
 }
@@ -63,19 +64,20 @@ char	**ft_split(char const *s, char c)
 	if (!result)
 		return (NULL);
 	wdcount = 0;
-	wdlen = 0;
 	while (*s)
 	{
+		wdlen = 0;
 		if (*s != c)
 		{
 			wdlen = ft_wdlen(s, c);
 			result[wdcount] = (char *)malloc(sizeof(char) * (wdlen + 1));
 			if (!result[wdcount])
 				return (ft_freearr(result, wdcount));
-			ft_strlcpy(result[wdcount], s, wdlen + 1);
+			ft_strlcpy(result[wdcount++], s, wdlen + 1);
 		}
-		s += wdlen + 1;
-		wdlen = 0;
+		s += wdlen;
+		if (*s)
+			s++;
 	}
 	result[wdcount] = NULL;
 	return (result);
