@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/21 16:04:08 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 16:10:36 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	**ft_split(char const *s, char c)
 	if (!result)
 		return (NULL);
 	wdcount = 0;
+	wdlen = 0;
 	while (*s)
 	{
 		if (*s != c)
@@ -74,6 +75,7 @@ char	**ft_split(char const *s, char c)
 			ft_strlcpy(result[wdcount], s, wdlen + 1);
 		}
 		s += wdlen + 1;
+		wdlen = 0;
 	}
 	result[wdcount] = NULL;
 	return (result);
