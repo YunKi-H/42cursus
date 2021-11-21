@@ -6,10 +6,13 @@
 /*   By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 15:55:32 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/21 16:01:51 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/21 17:55:48 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd);
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
