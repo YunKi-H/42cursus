@@ -6,7 +6,7 @@
 /*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 15:51:55 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/18 15:08:10 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/24 15:26:15 by maemi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 char	*ft_strchr(const char *s, int c)
 {
 	char	*tmp;
+	char	tc;
 
 	tmp = (char *)s;
-	if (*tmp == c)
+	tc = (char)c;
+	if (*tmp == tc)
 		return (tmp);
 	while (*tmp++)
 	{
-		if (*tmp == c)
+		if (*tmp == tc)
 			return (tmp);
 	}
 	return (NULL);

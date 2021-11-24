@@ -6,7 +6,7 @@
 /*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 20:38:27 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/22 13:53:41 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/24 17:32:31 by maemi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*ret;
 	size_t	i;
 
+	if (len > 2047)
+		len = 2047;
 	ret = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ret)
 		return (NULL);
