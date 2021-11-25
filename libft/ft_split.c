@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maemi <maemi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/22 14:14:42 by maemi            ###   ########.fr       */
+/*   Updated: 2021/11/25 12:23:36 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_wdcount(char const *s, char c)
 	{
 		while (s[index] == c)
 			index++;
-		if (s[index] != c)
+		if (s[index] != c && s[index])
 		{
 			while (s[index] != c && s[index])
 				index++;
@@ -81,4 +81,14 @@ char	**ft_split(char const *s, char c)
 	}
 	result[wdcount] = NULL;
 	return (result);
+
+
+
+
+
+
+
+
+
+
 }
