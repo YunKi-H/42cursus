@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 15:27:45 by maemi             #+#    #+#             */
-/*   Updated: 2021/11/25 12:23:36 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/25 12:27:02 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,4 @@ char	**ft_split(char const *s, char c)
 	}
 	result[wdcount] = NULL;
 	return (result);
-
-
-
-
-
-
-
-
-
-
 }
