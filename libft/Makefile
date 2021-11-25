@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yuhwang <yuhwang@student.42.fr>            +#+  +:+       +#+         #
+#    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/24 23:41:04 by maemi             #+#    #+#              #
-#    Updated: 2021/11/21 15:52:43 by yuhwang          ###   ########.fr        #
+#    Updated: 2021/11/25 13:16:18 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,23 @@ FILES = ft_atoi ft_bzero ft_calloc \
 		ft_tolower ft_toupper \
 		ft_substr ft_strjoin ft_strtrim \
 		ft_split ft_itoa ft_strmapi ft_striteri \
-		ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd \
+		ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd
+
+# BNS_FILES = ft_lstadd_back ft_lstadd_front \
+# 			ft_lstclear ft_lstdelone ft_lstiter ft_lstlast \
+# 			ft_lstmap ft_lstnew ft_lstsize
 
 SRCS_DIR = ./
 SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
 
 OBJS_DIR = ./
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+
+# BNS_SRCS_DIR = ./
+# SRCS = $(addprefix $(BNS_SRCS_DIR), $(addsuffix .c, $(BNS_FILES)))
+
+# BNS_OBJS_DIR = ./
+# OBJS = $(addprefix $(BNS_OBJS_DIR), $(addsuffix .o, $(BNS_FILES)))
 
 %.o : %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
