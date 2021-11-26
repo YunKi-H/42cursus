@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 20:38:27 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/24 19:30:38 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/25 20:17:56 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*ret;
 	size_t	i;
 
-	if (len > 2047)
-		len = 2047;
 	ret = (char *)malloc(sizeof(char) * (len + 1));
 	if (!ret)
 		return (NULL);
