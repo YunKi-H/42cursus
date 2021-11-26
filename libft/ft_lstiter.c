@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:43:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/26 12:56:20 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/26 20:29:15 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,9 @@
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	while (lst)
+	{
+		f(lst -> content);
+		lst = lst -> next;
+	}
 }

@@ -6,57 +6,91 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/24 23:41:04 by yuhwang           #+#    #+#              #
-#    Updated: 2021/11/26 12:45:40 by yuhwang          ###   ########.fr        #
+#    Updated: 2021/11/26 20:51:16 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME		=	libft.a
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-AR = ar rcs
-RM = rm -f
+CC			=	gcc
+CFLAGS		=	-Wall -Wextra -Werror
+AR			=	ar rcs
+RM			=	rm -f
 
-FILES = ft_atoi ft_bzero ft_calloc \
-		ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_isprint \
-		ft_memchr ft_memcmp ft_memcpy ft_memmove ft_memset \
-		ft_strchr ft_strdup ft_strlcat ft_strlcpy \
-		ft_strlen ft_strncmp ft_strnstr ft_strrchr \
-		ft_tolower ft_toupper \
-		ft_substr ft_strjoin ft_strtrim \
-		ft_split ft_itoa ft_strmapi ft_striteri \
-		ft_putchar_fd ft_putstr_fd ft_putendl_fd ft_putnbr_fd
+SRCS		=	ft_atoi.c \
+				ft_bzero.c \
+				ft_calloc.c \
+				ft_isalnum.c \
+				ft_isalpha.c \
+				ft_isascii.c \
+				ft_isdigit.c \
+				ft_isprint.c \
+				ft_memchr.c \
+				ft_memcmp.c \
+				ft_memcpy.c \
+				ft_memmove.c \
+				ft_memset.c \
+				ft_strchr.c \
+				ft_strdup.c \
+				ft_strlcat.c \
+				ft_strlcpy.c \
+				ft_strlen.c \
+				ft_strncmp.c \
+				ft_strnstr.c \
+				ft_strrchr.c \
+				ft_tolower.c \
+				ft_toupper.c \
+				ft_substr.c \
+				ft_strjoin.c \
+				ft_strtrim.c \
+				ft_split.c \
+				ft_itoa.c \
+				ft_strmapi.c \
+				ft_striteri.c \
+				ft_putchar_fd.c \
+				ft_putstr_fd.c \
+				ft_putendl_fd.c \
+				ft_putnbr_fd.c
 
-# BNS_FILES = ft_lstadd_back ft_lstadd_front \
-# 			ft_lstclear ft_lstdelone ft_lstiter ft_lstlast \
-# 			ft_lstmap ft_lstnew ft_lstsize
+BNS_SRCS	=	ft_lstadd_back.c \
+				ft_lstadd_front.c \
+				ft_lstclear.c \
+				ft_lstdelone.c \
+				ft_lstiter.c \
+				ft_lstlast.c \
+				ft_lstmap.c \
+				ft_lstnew.c \
+				ft_lstsize.c
 
-SRCS_DIR = ./
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+OBJS		=	$(SRCS:.c=.o)
 
-OBJS_DIR = ./
-OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILES)))
+BNS_OBJS	=	$(BNS_SRCS:.c=.o)
 
-# BNS_SRCS_DIR = ./
-# SRCS = $(addprefix $(BNS_SRCS_DIR), $(addsuffix .c, $(BNS_FILES)))
+ifdef WITH_BONUS
+	OBJ_FILES = $(OBJS) $(BNS_OBJS)
+else
+ 	OBJ_FILES = $(OBJS)
+endif
 
-# BNS_OBJS_DIR = ./
-# OBJS = $(addprefix $(BNS_OBJS_DIR), $(addsuffix .o, $(BNS_FILES)))
+all			:	$(NAME)
 
-%.o : %.c
-	$(CC) $(CFLAGS) -o $@ -c $<
+%.o			:	%.c
+				$(CC) $(CFLAGS) -o $@ -c $<
 
-$(NAME): $(OBJS)
-	$(AR) $@ $^
+$(NAME)		:	$(OBJ_FILES)
+				$(AR) $@ $^
 
-all: $(NAME)
+bonus		:
+				make WITH_BONUS=1 all
+# bonus		:	$(OBJS) $(BNS_OBJS)
+# 				$(AR) $(NAME) $^
 
-clean:
-	$(RM) $(OBJS)
+clean		:
+				$(RM) $(OBJS) $(BNS_OBJS)
 
-fclean: clean
-	$(RM) $(NAME)
+fclean		:	clean
+				$(RM) $(NAME)
 
-re: clean all
+re			:	clean all
 
-.PHONY: all clean fclean re
+.PHONY		:	all clean fclean re bonus
