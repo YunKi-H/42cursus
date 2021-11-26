@@ -6,7 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:42:57 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/26 12:42:58 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/26 12:54:58 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+}

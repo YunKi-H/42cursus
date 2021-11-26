@@ -6,7 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:43:20 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/26 12:43:20 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/26 12:57:40 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+int	ft_lstsize(t_list *lst)
+{
+}

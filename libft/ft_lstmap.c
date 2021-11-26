@@ -6,7 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:43:15 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/26 12:43:15 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/11/26 12:56:51 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+}
