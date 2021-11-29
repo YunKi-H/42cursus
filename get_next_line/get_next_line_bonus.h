@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:07:49 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/29 17:15:52 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/28 20:21:28 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/28 20:24:38 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-char	*ft_strrchr(const char *s, int c)
-{
-	const char	*tmp;
-	char		tc;
+#include <stdlib.h>
+#include <unistd.h>
 
-	tmp = NULL;
-	tc = (char)c;
-	if (*s == tc)
-		tmp = s;
-	while (*s++)
-	{
-		if (*s == tc)
-			tmp = s;
-	}
-	return ((char *)tmp);
-}
+char	*get_next_line(int fd);
+
+#endif
