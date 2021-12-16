@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:21:28 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/12/09 19:58:04 by yuhwang          ###   ########.fr       */
+/*   Updated: 2021/12/16 16:18:00 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+# define FD_MAX 10240
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
