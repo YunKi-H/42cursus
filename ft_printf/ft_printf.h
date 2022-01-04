@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/17 22:37:54 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/01/05 01:42:05 by yuhwang          ###   ########.fr       */
+/*   Created: 2022/01/05 01:40:25 by yuhwang           #+#    #+#             */
+/*   Updated: 2022/01/05 01:42:27 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	ft_printf(const char *str, ...)
-{
-	va_list	ap;
-	int		len;
+# include <stdarg.h>
+# include "libft.h"
 
-	va_start(ap, str);
-	len = 0;
-	while (*str)
-	{
-		if (*str == '%' && *(++str))
-		{
-			str++;
-		}
-		else
-		{
-			len++;
-		}
-		str++;
-	}
-	return (len);
-}
+int	ft_printf(const char *str, ...);
+
+#endif
