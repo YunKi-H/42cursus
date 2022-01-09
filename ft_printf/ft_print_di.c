@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_di.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/05 01:40:25 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/01/10 00:17:17 by yuhwang          ###   ########.fr       */
+/*   Created: 2022/01/09 23:50:07 by yuhwang           #+#    #+#             */
+/*   Updated: 2022/01/09 23:50:09 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <limits.h>
-# include "libft/libft.h"
+int	ft_print_di(va_list *ap)
+{
+	char	*str;
+	int		len;
 
-# define HEXADIGIT "0123456789ABCDEF"
-
-int	ft_printf(const char *format, ...);
-int	ft_print_c(va_list *ap);
-int	ft_print_s(va_list *ap);
-
-int	ft_print_di(va_list *ap);
-
-#endif
+	str = ft_itoa(va_arg(*ap, int));
+	if (!str)
+		return (INT_MIN);
+	len = ft_strlen(str);
+	write(1, str, len);
+	free(str);
+	return (len);
+}
