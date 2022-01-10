@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/05 01:40:25 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/01/10 23:13:00 by yuhwang          ###   ########.fr       */
+/*   Created: 2022/01/10 22:16:33 by yuhwang           #+#    #+#             */
+/*   Updated: 2022/01/10 23:19:21 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <limits.h>
-# include "libft/libft.h"
+int	ft_print_hex(long long nbr, int isupper)
+{
+	static char	digit[16] = "0123456789abcdef";
+	char		buf[20];
+	int			i;
 
-int	ft_printf(const char *format, ...);
-int	ft_print_c(va_list *ap);
-int	ft_print_s(va_list *ap);
-int	ft_print_hex(long long nbr, int isupper);
-int	ft_print_di(va_list *ap);
-
-#endif
+	i = -1;
+	if (isupper)
+		while (++i < 16)
+			digit[i] = ft_toupper(digit[i]);
+	i = 18;
+	ft_bzero(buf, 20);
+	while (nbr > 0)
+	{
+		buf[i--] = digit[nbr % 16];
+		nbr /= 16;
+	}
+	write(1, buf + i, 19 - i);
+	return (18 - i);
+}
