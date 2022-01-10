@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 01:40:25 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/01/10 23:13:00 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/01/10 23:52:36 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
-# include "libft/libft.h"
+# include "./libft/libft.h"
 
 int	ft_printf(const char *format, ...);
 int	ft_print_c(va_list *ap);

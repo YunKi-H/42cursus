@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 23:32:31 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/01/09 23:32:57 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/01/10 23:47:07 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	ft_print_s(va_list *ap)
 {
 	const char	*str;
-	int			len;
 
 	str = (const char *)va_arg(*ap, const char *);
 	if (!str)
