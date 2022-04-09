@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/16 20:38:27 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:45:16 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_stack a;
-	t_stack b;
+	char	*ret;
+	size_t	i;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
+		return (NULL);
+	if (start >= ft_strlen(s))
+	{
+		ft_bzero(ret, len + 1);
+		return (ret);
+	}
+	i = 0;
+	while (s[start + i] && i < len)
+	{
+		ret[i] = s[start + i];
+		i++;
+	}
+	ret[i] = 0;
+	return (ret);
 }

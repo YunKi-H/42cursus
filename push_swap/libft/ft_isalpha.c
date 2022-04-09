@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:06:58 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:41:31 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	main(int argc, char **argv)
+int	ft_isalpha(int c)
 {
-	t_stack a;
-	t_stack b;
-
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
 	return (0);
 }

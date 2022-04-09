@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/21 15:54:47 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:16 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	t_stack a;
-	t_stack b;
+	unsigned int	i;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

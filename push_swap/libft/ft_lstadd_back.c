@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/26 12:43:00 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 17:34:37 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_stack a;
-	t_stack b;
+	t_list	*tmp;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	if (*lst)
+	{
+		tmp = ft_lstlast(*lst);
+		tmp -> next = new;
+	}
+	else
+	{
+		*lst = new;
+	}
 }

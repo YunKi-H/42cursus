@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:07:39 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:43 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	t_stack a;
-	t_stack b;
+	size_t	len;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

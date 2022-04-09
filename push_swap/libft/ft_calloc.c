@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:06:49 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:41:08 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_stack a;
-	t_stack b;
+	void	*result;
+	size_t	tsize;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	if (count && size > (size_t)(-1) / count)
+		return (NULL);
+	tsize = count * size;
+	result = malloc(tsize);
+	if (!result)
+		return (NULL);
+	ft_bzero(result, tsize);
+	return (result);
 }

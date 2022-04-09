@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:07:26 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:13 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strdup(const char *s1)
 {
-	t_stack a;
-	t_stack b;
+	int		index;
+	char	*result;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	result = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!result)
+		return (NULL);
+	index = 0;
+	while (s1[index])
+	{
+		result[index] = s1[index];
+		index++;
+	}
+	result[index] = 0;
+	return (result);
 }

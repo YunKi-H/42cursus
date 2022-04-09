@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/16 16:48:57 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:42:27 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	t_stack a;
-	t_stack b;
+	size_t			i;
+	unsigned char	*t1;
+	unsigned char	*t2;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
+	t1 = (unsigned char *)s1;
+	t2 = (unsigned char *)s2;
+	i = 0;
+	while (i < n)
+	{
+		if (*(t1 + i) != *(t2 + i))
+			return (*(t1 + i) - *(t2 + i));
+		i++;
+	}
 	return (0);
 }

@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/18 01:17:58 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:23 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_stack a;
-	t_stack b;
+	char	*ret;
+	size_t	i;
+	size_t	j;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		ret[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		ret[i + j] = s2[j];
+		j++;
+	}
+	ret[i + j] = 0;
+	return (ret);
 }

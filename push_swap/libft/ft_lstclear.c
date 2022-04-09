@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:19 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/26 12:43:03 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 20:24:41 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_stack a;
-	t_stack b;
+	t_list	*now;
+	t_list	*tmp;
 
-	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
-	return (0);
+	now = *lst;
+	if (lst == 0 || del == 0)
+		return ;
+	while (now)
+	{
+		tmp = now;
+		now = now -> next;
+		ft_lstdelone(tmp, del);
+	}
+	*lst = NULL;
 }
