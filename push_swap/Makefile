@@ -6,31 +6,25 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 20:22:05 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/06 20:22:11 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/13 10:28:04 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	libftprintf.a
+NAME		=	push_swap
 LIBFTDIR	=	./libft
 LIBFTFILE	=	libft.a
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-AR			=	ar rcs
 RM			=	rm -f
 
-SRCS		=	ft_printf.c \
-				ft_print_c.c \
-				ft_print_s.c \
-				ft_print_di.c \
-				ft_print_hex.c
+SRCS		=	push_swap.c \
 
 OBJS		=	$(SRCS:.c=.o)
 
 $(NAME)		:	$(OBJS)
 				$(MAKE) bonus -C $(LIBFTDIR)
-				cp $(LIBFTDIR)/$(LIBFTFILE) $(NAME)
-				$(AR) $@ $^
+				$(CC) -o $@ $^ $(LIBFTDIR)/$(LIBFTFILE)
 
 all			:	$(NAME)
 
