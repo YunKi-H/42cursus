@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 11:05:56 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/13 16:37:32 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,31 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
 	t_stack *a;
 	t_stack *b;
 
+	if (argc <= 2)
+		exit(0);
+	ft_stack_init(&a);
+	ft_stack_init(&b);
 	ft_parse(a, argc, argv);
-	move_atob(a, b);
-	move_btoa(a, b);
+	// ft_atob(a, b);
+	// ft_btoa(a, b);
+
+	t_node *tmp;
+	tmp = a->head;
+	while (tmp->next != a->head)
+	{
+		printf("tmp->value : %zd\n", tmp->value);
+		tmp = tmp->next;
+	}
+	printf("tmp->value : %zd\n", tmp->value);
+	printf("a->size : %zu\n", a->size);
+
 	return (0);
 }
 
@@ -63,10 +79,8 @@ long long	ft_atol(const char *str)
 
 int	ft_isnum(char *str)
 {
-	if (*str == '+' || *str == '-' || ft_isdigit(*str))
+	if (*str == '+' || *str == '-')
 		str++;
-	else
-		return (0);
 	if (!*str)
 		return (0);
 	while (*str)
@@ -82,33 +96,73 @@ int	ft_isint(long long num)
 	return (num >= INT_MIN && num <= INT_MAX);
 }
 
-void	ft_parse(t_stack **a, int argc, char **argv)
+void	ft_parse(t_stack *a, int argc, char **argv)
 {
 	int		i;
-	size_t	value;
+	int		j;
+	ssize_t	value;
 	char	**strs;
 
 	i = 1;
 	while (i < argc)
 	{
-		strs = ft_split(argv[i], ' ');
-		while (*strs)
+		j = 0;
+		strs = ft_split(argv[i++], ' ');
+		while (strs[j])
 		{
-			if (ft_isnum(*strs))
-				value = ft_atol(*strs);
+			if (ft_isnum(strs[j]))
+				value = ft_atol(strs[j]);
 			else
 				ft_error(IS_NOT_NUM);
 			if (ft_isint(value))
 				ft_stack_push(a, ft_node_new(value));
 			else
 				ft_error(IS_NOT_INT);
-			strs++;
+			j++;
 		}
 		free(strs);
 	}
 }
 
-t_node	*ft_new_node(ssize_t value)
+void	ft_stack_init(t_stack **stack)
+{
+	*stack = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack)
+		ft_error(MALLOC_FAILED);
+	(*stack)->head = NULL;
+	(*stack)->size = 0;
+}
+
+void	ft_stack_push(t_stack *stack, t_node *new)
+{
+	t_node	*tmp;
+
+	if (!stack->head)
+	{
+		stack->head = new;
+		stack->size += 1;
+		return ;
+	}
+	tmp = stack->head;
+	while (tmp->next != stack->head)
+	{
+		// printf("tmp->value : %zd\n", tmp->value);
+		// printf("new->value : %zd\n", new->value);
+		// printf("%zu\n", stack->size);
+		if (tmp->value == new->value)
+			ft_error(IS_OVERLAPPED);
+		tmp = tmp->next;
+	}
+	if (tmp->value == new->value)
+		ft_error(IS_OVERLAPPED);
+	tmp->next = new;
+	new->prev = tmp;
+	new->next = stack->head;
+	stack->head->prev = new;
+	stack->size += 1;
+}
+
+t_node	*ft_node_new(ssize_t value)
 {
 	t_node	*new;
 
@@ -121,7 +175,3 @@ t_node	*ft_new_node(ssize_t value)
 	return(new);
 }
 
-void	ft_init_stack(t_stack *stack)
-{
-
-}

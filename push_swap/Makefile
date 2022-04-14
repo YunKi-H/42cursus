@@ -6,12 +6,12 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 20:22:05 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/13 10:28:04 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/13 15:31:54 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
-LIBFTDIR	=	./libft
+LIBFTDIR	=	../libft
 LIBFTFILE	=	libft.a
 
 CC			=	gcc
@@ -39,6 +39,8 @@ fclean		:	clean
 				$(MAKE) -C $(LIBFTDIR) fclean
 				$(RM) $(NAME)
 
-re			:	clean all
+re			:
+				$(MAKE) fclean
+				$(MAKE) all
 
 .PHONY		:	all clean fclean re
