@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:38:04 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/14 13:48:34 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/15 15:03:14 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,9 @@ void	ft_stack_init(t_stack **stack);
 void	ft_node_compare(t_node *exist, t_node *new);
 void	ft_stack_push(t_stack *stack, t_node *new);
 t_node	*ft_node_new(ssize_t value);
+int		ft_issorted(t_stack *stack);
+void	ft_atob(t_stack *a, t_stack *b);
+void	ft_push(t_stack *from, t_stack *to);
+void	ft_rotate(t_stack *stack);
 
 #endif
