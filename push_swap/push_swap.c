@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 16:37:32 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/14 13:48:43 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ int	main(int argc, char **argv)
 	while (tmp->next != a->head)
 	{
 		printf("tmp->value : %zd\n", tmp->value);
+		printf("tmp->index : %zd\n", tmp->index);
 		tmp = tmp->next;
 	}
 	printf("tmp->value : %zd\n", tmp->value);
+	printf("tmp->index : %zd\n", tmp->index);
 	printf("a->size : %zu\n", a->size);
 
 	return (0);
@@ -54,7 +56,7 @@ static int	ft_isspace(int c)
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }
 
-long long	ft_atol(const char *str)
+ssize_t	ft_atol(const char *str)
 {
 	long long	result;
 	long long	positive;
@@ -133,6 +135,16 @@ void	ft_stack_init(t_stack **stack)
 	(*stack)->size = 0;
 }
 
+void	ft_node_compare(t_node *exist, t_node *new)
+{
+	if (exist->value == new->value)
+			ft_error(IS_OVERLAPPED);
+		if (exist->value > new->value)
+			exist->index += 1;
+		else
+			new->index += 1;
+}
+
 void	ft_stack_push(t_stack *stack, t_node *new)
 {
 	t_node	*tmp;
@@ -149,12 +161,23 @@ void	ft_stack_push(t_stack *stack, t_node *new)
 		// printf("tmp->value : %zd\n", tmp->value);
 		// printf("new->value : %zd\n", new->value);
 		// printf("%zu\n", stack->size);
-		if (tmp->value == new->value)
-			ft_error(IS_OVERLAPPED);
+		// if (tmp->value == new->value)
+		// 	ft_error(IS_OVERLAPPED);
+		// if (tmp->value > new->value)
+		// 	tmp->index += 1;
+		// else
+		// 	new->index += 1;
+		ft_node_compare(tmp, new);
 		tmp = tmp->next;
 	}
-	if (tmp->value == new->value)
-		ft_error(IS_OVERLAPPED);
+	// if (tmp->value == new->value)
+	// 	ft_error(IS_OVERLAPPED);
+	// if (tmp->value > new->value)
+	// 		tmp->index += 1;
+	// else
+	// 	new->index += 1;
+	ft_node_compare(tmp, new);
+	//add_new_node_back
 	tmp->next = new;
 	new->prev = tmp;
 	new->next = stack->head;
@@ -170,6 +193,7 @@ t_node	*ft_node_new(ssize_t value)
 	if (!new)
 		ft_error(MALLOC_FAILED);
 	new->value = value;
+	new->index = 0;
 	new->prev = new;
 	new->next = new;
 	return(new);
