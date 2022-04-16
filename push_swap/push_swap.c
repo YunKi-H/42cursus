@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/15 20:39:09 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/16 19:30:24 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	main(int argc, char **argv)
 	ft_stack_init(&a);
 	ft_stack_init(&b);
 	ft_parse(a, argc, argv);
+	// ft_push(a, b);
+	// ft_push(a, b);
+	// ft_push(a, b);
 	ft_atob(a, b);
 	// ft_btoa(a, b);
 
@@ -38,9 +41,14 @@ int	main(int argc, char **argv)
 		// printf("atmp->index : %zd\n", tmp->index);
 		tmp = tmp->next;
 	}
-	printf("atmp->value : %zd\n", tmp->value);
-	// printf("atmp->index : %zd\n", tmp->index);
-	printf("a->size : %zu\n", a->size);
+	if (tmp)
+	{
+		printf("atmp->value : %zd\n", tmp->value);
+		// printf("atmp->index : %zd\n", tmp->index);
+		printf("a->size : %zu\n", a->size);
+	}
+	else
+		printf("a is empty\n");
 
 	tmp = b->head;
 	while (tmp && tmp->next != b->head)
@@ -49,9 +57,14 @@ int	main(int argc, char **argv)
 		// printf("btmp->index : %zd\n", tmp->index);
 		tmp = tmp->next;
 	}
-	printf("btmp->value : %zd\n", tmp->value);
-	// printf("btmp->index : %zd\n", tmp->index);
-	printf("b->size : %zu\n", b->size);
+	if (tmp)
+	{
+		printf("btmp->value : %zd\n", tmp->value);
+		// printf("btmp->index : %zd\n", tmp->index);
+		printf("b->size : %zu\n", b->size);
+	}
+	else
+		printf("b is empty\n");
 
 	return (0);
 }
@@ -209,12 +222,71 @@ int	ft_issorted(t_stack *stack)
 	return (1);
 }
 
+size_t	ft_get_precision(size_t n)
+{
+	size_t	root;
+
+	root = 2;
+	while (root * root < n)
+		root += 1;
+	return (root / 2);
+}
+
+void	ft_arg_case3(t_stack *stack)
+{
+	printf("case3 : %zu\n", stack->size);
+}
+
+void	ft_arg_case4(t_stack *stack)
+{
+	printf("case4 : %zu\n", stack->size);
+}
+
+void	ft_arg_case5(t_stack *stack)
+{
+	printf("case5 : %zu\n", stack->size);
+}
+
 void	ft_atob(t_stack *a, t_stack *b)
 {
+	size_t	precision;
+	size_t	pivot;
+
+	precision = ft_get_precision(a->size);
 	if (ft_issorted(a))
 		exit(0);
-	ft_push(a, b);
-	ft_push(a, b);
+	if (a->size == 3)
+		ft_arg_case3(a);
+	else if (a->size == 4)
+		ft_arg_case4(a);
+	else if (a->size == 5)
+		ft_arg_case5(a);
+	else
+	{
+		pivot = 0;
+		while (a->size)
+		{
+			if (a->head->index <= pivot)
+			{
+				ft_push(a, b);
+				printf("pb\n");
+				ft_rotate(b);
+				printf("rb\n");
+				pivot += 1;
+			}
+			else if (a->head->index <= pivot + precision)
+			{
+				ft_push(a, b);
+				printf("pb\n");
+				pivot += 1;
+			}
+			else
+			{
+				ft_rotate(a);
+				printf("ra\n");
+			}
+		}
+	}
 }
 
 void	ft_push(t_stack *from, t_stack *to)
@@ -232,24 +304,31 @@ void	ft_push(t_stack *from, t_stack *to)
 	{
 		to->head->prev->next = from->head;
 		from->head = from->head->next;
-		to->head->prev->next->prev = from->head->prev;
+		to->head->prev->next->prev = to->head->prev;
 		to->head->prev->next->next = to->head;
 		to->head->prev = to->head->prev->next;
 		to->head = to->head->prev;
 	}
 	from->size -= 1;
 	to->size += 1;
-	printf("p\n");
+	if (!from->size)
+		from->head = NULL;
+	// printf("p\n");
 }
 
 void	ft_rotate(t_stack *stack)
 {
 	stack->head = stack->head->next;
-	printf("r\n");
+	// printf("r\n");
 }
 
 void	ft_rev_rotate(t_stack *stack)
 {
 	stack->head = stack->head->prev;
-	printf("rr\n");
+	// printf("rr\n");
+}
+
+void	ft_btoa(t_stack *b, t_stack *a)
+{
+
 }
