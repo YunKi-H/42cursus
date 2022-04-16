@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:20:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/16 19:30:24 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/16 23:53:48 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,40 +31,40 @@ int	main(int argc, char **argv)
 	// ft_push(a, b);
 	// ft_push(a, b);
 	ft_atob(a, b);
-	// ft_btoa(a, b);
+	ft_btoa(a, b);
 
-	t_node *tmp;
-	tmp = a->head;
-	while (tmp && tmp->next != a->head)
-	{
-		printf("atmp->value : %zd\n", tmp->value);
-		// printf("atmp->index : %zd\n", tmp->index);
-		tmp = tmp->next;
-	}
-	if (tmp)
-	{
-		printf("atmp->value : %zd\n", tmp->value);
-		// printf("atmp->index : %zd\n", tmp->index);
-		printf("a->size : %zu\n", a->size);
-	}
-	else
-		printf("a is empty\n");
+	// t_node *tmp;
+	// tmp = a->head;
+	// while (tmp && tmp->next != a->head)
+	// {
+	// 	printf("atmp->value : %zd\n", tmp->value);
+	// 	// printf("atmp->index : %zd\n", tmp->index);
+	// 	tmp = tmp->next;
+	// }
+	// if (tmp)
+	// {
+	// 	printf("atmp->value : %zd\n", tmp->value);
+	// 	// printf("atmp->index : %zd\n", tmp->index);
+	// 	printf("a->size : %zu\n", a->size);
+	// }
+	// else
+	// 	printf("a is empty\n");
 
-	tmp = b->head;
-	while (tmp && tmp->next != b->head)
-	{
-		printf("btmp->value : %zd\n", tmp->value);
-		// printf("btmp->index : %zd\n", tmp->index);
-		tmp = tmp->next;
-	}
-	if (tmp)
-	{
-		printf("btmp->value : %zd\n", tmp->value);
-		// printf("btmp->index : %zd\n", tmp->index);
-		printf("b->size : %zu\n", b->size);
-	}
-	else
-		printf("b is empty\n");
+	// tmp = b->head;
+	// while (tmp && tmp->next != b->head)
+	// {
+	// 	printf("btmp->value : %zd\n", tmp->value);
+	// 	// printf("btmp->index : %zd\n", tmp->index);
+	// 	tmp = tmp->next;
+	// }
+	// if (tmp)
+	// {
+	// 	printf("btmp->value : %zd\n", tmp->value);
+	// 	// printf("btmp->index : %zd\n", tmp->index);
+	// 	printf("b->size : %zu\n", b->size);
+	// }
+	// else
+	// 	printf("b is empty\n");
 
 	return (0);
 }
@@ -328,7 +328,46 @@ void	ft_rev_rotate(t_stack *stack)
 	// printf("rr\n");
 }
 
-void	ft_btoa(t_stack *b, t_stack *a)
+void	ft_btoa(t_stack *a, t_stack *b)
 {
+	size_t	half;
+	size_t	maxidx;
+	t_node	*tmp;
+	size_t	i;
 
+	while (b->size)
+	{
+		half = b->size / 2;
+		maxidx = b->size - 1;
+		tmp = b->head;
+		i = 0;
+		while (tmp->next != b->head)
+		{
+			if (tmp->index == maxidx)
+				break;
+			i++;
+			tmp = tmp->next;
+		}
+		if (i <= half)
+		{
+			while (b->head->index != maxidx)
+			{
+				ft_rotate(b);
+				printf("rb\n");
+			}
+		}
+		else
+		{
+			while (b->head->index != maxidx)
+			{
+				ft_rev_rotate(b);
+				printf("rrb\n");
+				// printf("b.size : %zu\n", b->size);
+				// printf("maxidx : %zu\n", maxidx);
+				// printf("b->head->index : %zu\n", b->head->index);
+			}
+		}
+		ft_push(b, a);
+		printf("pa\n");
+	}
 }
