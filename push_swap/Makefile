@@ -6,7 +6,7 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 20:22:05 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/13 15:31:54 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/17 16:28:29 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,13 @@ CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -f
 
-SRCS		=	push_swap.c \
+SRCS		=	push_swap.c		\
+				ft_atob.c		\
+				ft_btoa.c		\
+				ft_operators.c	\
+				ft_cases.c		\
+				ft_stacks.c		\
+				ft_parse.c		\
 
 OBJS		=	$(SRCS:.c=.o)
 
