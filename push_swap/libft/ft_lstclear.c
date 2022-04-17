@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/26 12:43:03 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 20:24:41 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	int	result;
-	int	positive;
+	t_list	*now;
+	t_list	*tmp;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	now = *lst;
+	if (lst == 0 || del == 0)
+		return ;
+	while (now)
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		tmp = now;
+		now = now -> next;
+		ft_lstdelone(tmp, del);
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (positive * result);
+	*lst = NULL;
 }

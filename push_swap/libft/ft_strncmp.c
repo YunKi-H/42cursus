@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:07:42 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:54 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int	result;
-	int	positive;
+	size_t	i;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (positive * result);
+	return (0);
 }

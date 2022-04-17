@@ -6,12 +6,12 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/06 20:22:05 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/17 16:28:29 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/17 17:08:52 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	push_swap
-LIBFTDIR	=	../libft
+LIBFTDIR	=	./libft
 LIBFTFILE	=	libft.a
 
 CC			=	gcc

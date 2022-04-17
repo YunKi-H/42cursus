@@ -6,12 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 16:28:37 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/17 16:30:42 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/17 17:08:46 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "../libft/libft.h"
+#include "./libft/libft.h"
 #include <limits.h>
 
 static int	ft_isspace(int c)

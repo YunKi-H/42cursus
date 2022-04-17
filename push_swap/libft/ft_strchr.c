@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/16 15:51:55 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:07 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-	int	result;
-	int	positive;
+	char	*tmp;
+	char	tc;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	tmp = (char *)s;
+	tc = (char)c;
+	if (*tmp == tc)
+		return (tmp);
+	while (*tmp++)
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		if (*tmp == tc)
+			return (tmp);
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (positive * result);
+	return (NULL);
 }

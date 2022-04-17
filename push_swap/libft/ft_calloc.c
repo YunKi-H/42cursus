@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:06:49 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:41:08 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+void	*ft_calloc(size_t count, size_t size)
 {
-	int	result;
-	int	positive;
+	void	*result;
+	size_t	tsize;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (positive * result);
+	if (count && size > (size_t)(-1) / count)
+		return (NULL);
+	tsize = count * size;
+	result = malloc(tsize);
+	if (!result)
+		return (NULL);
+	ft_bzero(result, tsize);
+	return (result);
 }

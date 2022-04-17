@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/26 12:43:15 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/12/29 19:54:14 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	result;
-	int	positive;
+	t_list	*new;
+	t_list	*tmp;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	new = NULL;
+	while (lst)
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		tmp = ft_lstnew(f(lst -> content));
+		if (!tmp)
+		{
+			ft_lstclear(&new, del);
+			break ;
+		}
+		ft_lstadd_back(&new, tmp);
+		lst = lst -> next;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (positive * result);
+	return (new);
 }

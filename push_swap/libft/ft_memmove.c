@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:07:19 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:43:31 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	int	result;
-	int	positive;
+	size_t	i;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	if (!dst && !src)
+		return (NULL);
+	if (dst < src)
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		i = 0;
+		while (i < len)
+		{
+			*((unsigned char *)dst + i) = *((unsigned char *)src + i);
+			i++;
+		}
 	}
-	while (*str >= '0' && *str <= '9')
+	else
 	{
-		result = result * 10 + *str - '0';
-		str++;
+		while (len--)
+			*((unsigned char *)dst + len) = *((unsigned char *)src + len);
 	}
-	return (positive * result);
+	return (dst);
 }

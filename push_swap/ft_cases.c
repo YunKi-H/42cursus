@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 16:21:58 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/17 16:32:35 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/17 16:51:36 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_arg_case3(t_stack *a, t_stack *b)
 	size_t	idx;
 
 	idx = a->size + b->size - 3;
+	if (a->head->index == idx && a->head->next->index == idx + 1)
+		return ;
 	if (a->head->index == idx)
 		write(1, "rra\nsa\n", 7);
 	else if (a->head->index == idx + 1)

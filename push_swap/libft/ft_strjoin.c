@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/18 01:17:58 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:44:23 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	result;
-	int	positive;
+	char	*ret;
+	size_t	i;
+	size_t	j;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	ret = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!ret)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		ret[i] = s1[i];
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
+	j = 0;
+	while (s2[j])
 	{
-		result = result * 10 + *str - '0';
-		str++;
+		ret[i + j] = s2[j];
+		j++;
 	}
-	return (positive * result);
+	ret[i + j] = 0;
+	return (ret);
 }

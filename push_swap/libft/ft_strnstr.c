@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/08 13:07:46 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:45:02 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
-{
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
-}
+#include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int	result;
-	int	positive;
+	size_t	i;
+	size_t	slen;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	if (*needle == 0)
+		return ((char *)haystack);
+	i = 0;
+	slen = ft_strlen(needle);
+	while (i < len && haystack[i])
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		if (haystack[i] == *needle)
+		{
+			if (!ft_strncmp(&haystack[i], needle, slen) && i + slen <= len)
+				return ((char *)&haystack[i]);
+		}
+		i++;
 	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + *str - '0';
-		str++;
-	}
-	return (positive * result);
+	return (NULL);
 }

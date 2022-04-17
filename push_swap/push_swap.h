@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:38:04 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/17 16:32:41 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/17 17:07:44 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ void	ft_push(t_stack *from, t_stack *to, const char *oper);
 void	ft_rotate(t_stack *stack, const char *oper);
 void	ft_rev_rotate(t_stack *stack, const char *oper);
 void	ft_btoa(t_stack *b, t_stack *a);
+char	**ft_split(char const *s, char c);
+int		ft_isdigit(int c);
 
 #endif

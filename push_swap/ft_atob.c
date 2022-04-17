@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 15:46:58 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/17 16:32:58 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/17 17:00:02 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int	ft_issorted(t_stack *stack)
 
 size_t	ft_get_precision(size_t n)
 {
-	size_t	root;
+	double	x;
 
-	root = 2;
-	while (root * root < n)
-		root += 1;
-	return (root / 2);
+	x = (double)n;
+	return ((size_t)(0.000000053 * x * x + 0.03 * x + 14.5));
 }
 
 void	ft_atob(t_stack *a, t_stack *b)

@@ -1,39 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 13:06:42 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/13 10:02:27 by yuhwang          ###   ########.fr       */
+/*   Created: 2021/11/21 15:56:37 by yuhwang           #+#    #+#             */
+/*   Updated: 2021/11/26 12:43:52 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isspace(int c)
+#include "libft.h"
+
+static void	ft_itoa_fd(int n, int fd)
 {
-	return (c == ' ' || (c >= '\t' && c <= '\r'));
+	if (n < 10)
+	{
+		ft_putchar_fd(n + '0', fd);
+		return ;
+	}
+	else
+	{
+		ft_itoa_fd(n / 10, fd);
+		ft_putchar_fd(n % 10 + '0', fd);
+	}
 }
 
-int	ft_atoi(const char *str)
+void	ft_putnbr_fd(int n, int fd)
 {
-	int	result;
-	int	positive;
+	int	i;
 
-	positive = 1;
-	result = 0;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
+	i = n;
+	if (i == -2147483648)
 	{
-		if (*str == '-')
-			positive = -positive;
-		str++;
+		write(fd, "-2147483648", 11);
 	}
-	while (*str >= '0' && *str <= '9')
+	else if (i >= 0)
 	{
-		result = result * 10 + *str - '0';
-		str++;
+		ft_itoa_fd(i, fd);
 	}
-	return (positive * result);
+	else
+	{
+		ft_putchar_fd('-', fd);
+		i = -i;
+		ft_itoa_fd(i, fd);
+	}
 }
