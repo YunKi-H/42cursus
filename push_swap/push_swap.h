@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:38:04 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/16 19:30:35 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/17 15:35:00 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,12 @@ void	ft_stack_push(t_stack *stack, t_node *new);
 t_node	*ft_node_new(ssize_t value);
 int		ft_issorted(t_stack *stack);
 void	ft_atob(t_stack *a, t_stack *b);
-void	ft_arg_case3(t_stack *stack);
-void	ft_arg_case4(t_stack *stack);
-void	ft_arg_case5(t_stack *stack);
+void	ft_arg_case3(t_stack *a, t_stack *b);
+void	ft_arg_case45(t_stack *a, t_stack *b);
 size_t	ft_get_precision(size_t n);
-void	ft_push(t_stack *from, t_stack *to);
-void	ft_rotate(t_stack *stack);
-void	ft_rev_rotate(t_stack *stack);
+void	ft_push(t_stack *from, t_stack *to, const char *oper);
+void	ft_rotate(t_stack *stack, const char *oper);
+void	ft_rev_rotate(t_stack *stack, const char *oper);
 void	ft_btoa(t_stack *b, t_stack *a);
 
 #endif
