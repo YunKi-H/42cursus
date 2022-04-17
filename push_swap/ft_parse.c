@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 16:28:37 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/17 17:08:46 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/17 18:34:26 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	ft_parse(t_stack *a, int argc, char **argv)
 			if (!ft_isint(value))
 				ft_error(IS_NOT_INT);
 			ft_stack_push(a, ft_node_new(value));
+			free(strs[j]);
 			j++;
 		}
 		free(strs);
