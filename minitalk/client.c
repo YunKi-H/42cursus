@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 12:51:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/19 13:46:04 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/19 13:59:20 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ void	send_bit(int pid, int bit)
 
 void	send_char(int pid, int c)
 {
-	send_bit(pid, c & 1 << 7);
-	send_bit(pid, c & 1 << 6);
-	send_bit(pid, c & 1 << 5);
-	send_bit(pid, c & 1 << 4);
-	send_bit(pid, c & 1 << 3);
-	send_bit(pid, c & 1 << 2);
-	send_bit(pid, c & 1 << 1);
-	send_bit(pid, c & 1);
+	send_bit(pid, c & 0b10000000);
+	send_bit(pid, c & 0b01000000);
+	send_bit(pid, c & 0b00100000);
+	send_bit(pid, c & 0b00010000);
+	send_bit(pid, c & 0b00001000);
+	send_bit(pid, c & 0b00000100);
+	send_bit(pid, c & 0b00000010);
+	send_bit(pid, c & 0b00000001);
 }
 
 int	main(int argc, char **argv)
