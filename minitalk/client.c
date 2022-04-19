@@ -6,15 +6,13 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 12:51:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/19 13:44:08 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/19 13:46:04 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-#include <stdio.h>
 
 int	ft_atoi(const char *str)
 {
