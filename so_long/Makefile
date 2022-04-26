@@ -6,7 +6,7 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 12:36:14 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/21 12:41:36 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/25 07:52:20 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
 RM				=	rm -f
 
-SRCS			=	so_long.c	\
+SRCS			=	so_long.c		\
+					get_next_line.c	\
 
 OBJS		=	$(SRCS:.c=.o)
 
