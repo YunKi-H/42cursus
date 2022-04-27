@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:21:23 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/12/17 22:25:59 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:40:10 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_memo(char **note, char *buf, int fd)
 	char	*tmp;
 	ssize_t	len;
 
+	len = BUFFER_SIZE + 1;
 	while (!ft_strchr(note[fd], '\n') && !(len < BUFFER_SIZE))
 	{
 		len = read(fd, buf, BUFFER_SIZE);
