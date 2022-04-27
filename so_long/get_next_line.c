@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:21:23 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/24 18:00:44 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:39:03 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <unistd.h>
 #include "get_next_line.h"
 #include "../libft/libft.h"
+
+#include <stdio.h>
 
 static void	ft_free(void **ptr)
 {
@@ -26,6 +28,7 @@ static void	ft_memo(char **note, char *buf, int fd)
 	char	*tmp;
 	ssize_t	len;
 
+	len = BUFFER_SIZE + 1;
 	while (!ft_strchr(note[fd], '\n') && !(len < BUFFER_SIZE))
 	{
 		len = read(fd, buf, BUFFER_SIZE);
