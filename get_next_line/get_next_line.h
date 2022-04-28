@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:21:28 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/27 16:18:43 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/28 16:17:53 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <unistd.h>
 # include <limits.h>
 
-// # ifndef BUFFER_SIZE
+# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
-// # endif
+# endif
 # ifndef FD_MAX
 #  define FD_MAX OPEN_MAX
 # endif
