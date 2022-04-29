@@ -6,7 +6,7 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 12:36:14 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/27 16:12:46 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/29 20:10:56 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME			=	so_long
 LIBFTDIR		=	../libft
 LIBFTFILE		=	libft.a
 MINILIBXDIR		=	./minilibx_mms
-MINILIBXFILE	=	libmlx.dylib
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
@@ -28,8 +27,7 @@ OBJS		=	$(SRCS:.c=.o)
 $(NAME)		:	$(OBJS)
 				$(MAKE) bonus -C $(LIBFTDIR)
 				$(MAKE) -C $(MINILIBXDIR)
-				cp $(MINILIBXDIR)/$(MINILIBXFILE) $(MINILIBXFILE)
-				$(CC) -o $@ $^ $(LIBFTDIR)/$(LIBFTFILE) $(MINILIBXFILE)
+				$(CC) -o $@ $^ $(LIBFTDIR)/$(LIBFTFILE)  -L$(MINILIBXDIR)
 
 all			:	$(NAME)
 
@@ -43,7 +41,7 @@ clean		:
 
 fclean		:	clean
 				$(MAKE) -C $(LIBFTDIR) fclean
-				$(RM) $(NAME) $(MINILIBXFILE)
+				$(RM) $(NAME)
 
 re			:
 				$(MAKE) fclean
