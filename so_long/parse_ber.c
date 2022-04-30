@@ -6,15 +6,14 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:54:21 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/30 14:56:48 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/30 15:15:21 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <fcntl.h>
 #include <limits.h>
 #include "so_long.h"
-#include "../libft/libft.h"
+#include "./libft/libft.h"
 
 t_map	*map_init(const char *file)
 {

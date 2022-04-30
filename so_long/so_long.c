@@ -6,17 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:53:20 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/30 15:04:36 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/30 15:15:29 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <limits.h>
 #include "so_long.h"
-#include "../libft/libft.h"
+#include "./libft/libft.h"
 #include "minilibx_mms/mlx.h"
 
 int	main(int argc, char **argv)

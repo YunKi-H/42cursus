@@ -6,16 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 20:21:23 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/27 16:39:03 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/30 15:14:55 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <unistd.h>
 #include "get_next_line.h"
-#include "../libft/libft.h"
-
-#include <stdio.h>
+#include "./libft/libft.h"
 
 static void	ft_free(void **ptr)
 {

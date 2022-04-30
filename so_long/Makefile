@@ -6,12 +6,12 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 12:36:14 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/30 15:03:08 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/30 15:12:41 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			=	so_long
-LIBFTDIR		=	../libft
+LIBFTDIR		=	./libft
 LIBFTFILE		=	libft.a
 MINILIBXDIR		=	./minilibx_mms
 MINILIBXLIB		=	libmlx.dylib

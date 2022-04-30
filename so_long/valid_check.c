@@ -6,12 +6,12 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:51:32 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/30 14:53:02 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/30 15:14:06 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "../libft/libft.h"
+#include "./libft/libft.h"
 
 void	isvalid_extension(const char *file)
 {
