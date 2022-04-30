@@ -6,7 +6,7 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/21 12:36:14 by yuhwang           #+#    #+#              #
-#    Updated: 2022/04/29 20:10:56 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/04/30 15:03:08 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,17 @@ NAME			=	so_long
 LIBFTDIR		=	../libft
 LIBFTFILE		=	libft.a
 MINILIBXDIR		=	./minilibx_mms
+MINILIBXLIB		=	libmlx.dylib
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
 RM				=	rm -f
 
 SRCS			=	so_long.c		\
+					parse_ber.c		\
+					game_maker.c	\
+					key_press.c		\
+					valid_check.c	\
 					get_next_line.c	\
 
 OBJS		=	$(SRCS:.c=.o)
@@ -27,7 +32,8 @@ OBJS		=	$(SRCS:.c=.o)
 $(NAME)		:	$(OBJS)
 				$(MAKE) bonus -C $(LIBFTDIR)
 				$(MAKE) -C $(MINILIBXDIR)
-				$(CC) -o $@ $^ $(LIBFTDIR)/$(LIBFTFILE)  -L$(MINILIBXDIR)
+				cp $(MINILIBXDIR)/$(MINILIBXLIB) .
+				$(CC) -o $@ $^ $(LIBFTDIR)/$(LIBFTFILE) $(MINILIBXLIB)
 
 all			:	$(NAME)
 
@@ -41,7 +47,7 @@ clean		:
 
 fclean		:	clean
 				$(MAKE) -C $(LIBFTDIR) fclean
-				$(RM) $(NAME)
+				$(RM) $(NAME) $(MINILIBXLIB)
 
 re			:
 				$(MAKE) fclean
