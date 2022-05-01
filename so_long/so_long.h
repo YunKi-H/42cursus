@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 10:53:24 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/04/30 15:00:56 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/05/01 12:45:23 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # define INVALID_FD "FAIL TO OPEN FILE\n"
 # define IS_NOT_SEALED "MAP IS NOT SEALED\n"
 # define IS_NOT_SQUARE "MAP IS NOT SQUARE\n"
-# define NO_EXIT "MAP HAS NO EXIT\n"
-# define NO_COLLECTIBLES "MAP HAS NO COLLETIBLES\n"
-# define NO_START_POINT "MAP HAS NO START POINT\n"
+# define NO_EXIT "MAP MUST HAVE ONE EXIT\n"
+# define NO_COLLECTIBLES "MAP MUST HAVE AT LEAST ONE COLLETIBLES\n"
+# define NO_START_POINT "MAP MUST HAVE ONE START POINT\n"
 # define MALLOC_FAILED "MEMORY ALLOCATION FAILED\n"
 
 # include <stddef.h>
