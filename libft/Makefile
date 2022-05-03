@@ -6,13 +6,13 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/24 23:41:04 by yuhwang           #+#    #+#              #
-#    Updated: 2021/11/26 20:51:16 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/05/03 19:00:50 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	libft.a
 
-CC			=	gcc
+CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 AR			=	ar rcs
 RM			=	rm -f
