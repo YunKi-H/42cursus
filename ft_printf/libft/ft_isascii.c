@@ -6,13 +6,11 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 15:32:59 by yuhwang           #+#    #+#             */
-/*   Updated: 2021/11/26 12:41:49 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/04/09 14:08:07 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isascii(int c)
 {
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }
