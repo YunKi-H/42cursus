@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/19 14:20:21 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/21 11:23:58 by yuhwang          ###   ########.fr       */
+/*   Created: 2022/06/21 11:20:29 by yuhwang           #+#    #+#             */
+/*   Updated: 2022/06/21 11:21:10 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+int	ft_atoi(const char *str)
 {
-	if (argc < 5 || argc > 6)
+	int	result;
+	int	positive;
+
+	positive = 1;
+	result = 0;
+	while (*str == ' ' || (*str >= '\t' && *str <= '\r'))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		write(2, "USAGE: ./philo ", 16);
-		write(2, "[number_of_philosophers] ", 26);
-		write(2, "[time_to_die] ", 15);
-		write(2, "[time_to_eat] ", 15);
-		write(2, "[time_to_sleep] ", 17);
-		write(2, "(number_of_times_each_philosopher_must_eat)\n", 45);
-		return (1);
+		if (*str == '-')
+			positive = -positive;
+		str++;
 	}
-	ft_atoi(argv[1]);
-	return (0);
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + *str - '0';
+		str++;
+	}
+	return (positive * result);
 }
