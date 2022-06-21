@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/21 11:52:05 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/22 01:07:14 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct s_args
 	int				number_of_times_each_philosopher_must_eat;
 	t_fork			**forks;
 	t_philo			**philos;
+	t_monitor		*monitor;
 };
 
 struct s_philo
@@ -65,6 +66,13 @@ struct s_monitor
 
 };
 
+t_args	*init_args(int argc, char *argv[]);
+t_fork	**init_forks(int number_of_philosophers);
+t_fork	*init_fork(int i);
+t_philo	**init_philos(t_fork **forks, int number_of_philosophers);
+t_philo	*init_philo(t_fork **forks, int	i, int number_of_philosophers);
 int	ft_atoi(const char *str);
+int	isnum(char *str);
+int	verify_arg(char *arg);
 
 #endif
