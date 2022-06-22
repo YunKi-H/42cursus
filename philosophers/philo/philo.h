@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/22 01:07:14 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/22 10:20:52 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ typedef struct s_monitor t_monitor;
 
 struct s_args
 {
-	int				number_of_philosophers;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				number_of_times_each_philosopher_must_eat;
-	t_fork			**forks;
-	t_philo			**philos;
-	t_monitor		*monitor;
+	int			number_of_philosophers;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			number_of_times_each_philosopher_must_eat;
+	t_fork		**forks;
+	t_philo		**philos;
+	t_monitor	*monitor;
 };
 
 struct s_philo

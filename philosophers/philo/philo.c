@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:21 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/22 01:13:54 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/22 10:56:35 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char *argv[])
 {
 	t_args	*args;
+
 	if (argc < 5 || argc > 6)
 	{
 		write(2, "USAGE: ./philo ", 16);
@@ -156,4 +157,12 @@ int	isnum(char *str)
 		str += 1;
 	}
 	return (1);
+}
+
+long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec + time.tv_usec % 1000);
 }
