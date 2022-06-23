@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:21 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/22 10:56:35 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/23 12:23:03 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,4 +165,20 @@ long	get_time(void)
 
 	gettimeofday(&time, NULL);
 	return (time.tv_sec + time.tv_usec % 1000);
+}
+
+void	philo_factory(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->number_of_philosophers)
+	{
+
+	}
+}
+
+void	philo_lifecycle(t_philo *philo)
+{
+
 }
