@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/23 09:46:34 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/23 16:53:50 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,28 @@ typedef struct s_monitor t_monitor;
 
 struct s_args
 {
-	int			number_of_philosophers;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			number_of_times_each_philosopher_must_eat;
-	t_fork		**forks;
-	t_philo		**philos;
-	t_monitor	*monitor;
+	int				number_of_philosophers;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_of_times_each_philosopher_must_eat;
+	long			start_time;
+	int				game_over;
+	t_fork			**forks;
+	t_philo			**philos;
+	pthread_t		*monitor;
+	pthread_mutex_t	*print;
 };
 
 struct s_philo
 {
-	int		idx;
-	int		last_meal;
-	int		eat_count;
-	t_fork	*left;
-	t_fork	*right;
+	pthread_t	*thread;
+	int			idx;
+	long		last_meal;
+	int			eat_count;
+	t_fork		*left;
+	t_fork		*right;
+	t_args		*args;
 };
 
 struct s_fork
@@ -61,18 +66,20 @@ struct s_fork
 	pthread_mutex_t	*mutex;
 };
 
-struct s_monitor
-{
-
-};
-
-t_args	*init_args(int argc, char *argv[]);
-t_fork	**init_forks(int number_of_philosophers);
-t_fork	*init_fork(int i);
-t_philo	**init_philos(t_fork **forks, int number_of_philosophers);
-t_philo	*init_philo(t_fork **forks, int	i, int number_of_philosophers);
-int	ft_atoi(const char *str);
-int	isnum(char *str);
-int	verify_arg(char *arg);
+// philos
+int		philo_factory(t_args *args);
+void	*philo_lifecycle(void *philo);
+void	*monitoting(void *args);
+// init
+int	init_args(t_args *args, int argc, char *argv[]);
+int	init_forks(t_fork **forks, int number_of_philosophers);
+int	init_fork(t_fork *fork, int i);
+int	init_philos(t_args *args, int number_of_philosophers);
+int	init_philo(t_args *args, t_philo *philo, int i, int number_of_philosophers);
+// utils
+int		ft_atoi(const char *str);
+int		isnum(char *str);
+int		verify_arg(char *arg);
+long	get_time(void);
 
 #endif
