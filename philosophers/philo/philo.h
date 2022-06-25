@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/23 16:53:50 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/25 21:02:21 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ struct s_args
 	int				game_over;
 	t_fork			**forks;
 	t_philo			**philos;
-	pthread_t		*monitor;
-	pthread_mutex_t	*print;
+	pthread_t		monitor;
+	pthread_mutex_t	print;
 };
 
 struct s_philo
 {
-	pthread_t	*thread;
+	pthread_t	thread;
 	int			idx;
 	long		last_meal;
 	int			eat_count;
@@ -63,23 +63,27 @@ struct s_fork
 {
 	int				idx;
 	int				status;
-	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex;
 };
 
 // philos
 int		philo_factory(t_args *args);
 void	*philo_lifecycle(void *philo);
 void	*monitoting(void *args);
+int	eating(t_philo *philo);
+int	sleeping(t_philo *philo);
+int	thinking(t_philo *philo);
 // init
-int	init_args(t_args *args, int argc, char *argv[]);
-int	init_forks(t_fork **forks, int number_of_philosophers);
-int	init_fork(t_fork *fork, int i);
-int	init_philos(t_args *args, int number_of_philosophers);
-int	init_philo(t_args *args, t_philo *philo, int i, int number_of_philosophers);
+int		init_args(t_args *args, int argc, char *argv[]);
+int		init_forks(t_args *args, int number_of_philosophers);
+t_fork	*init_fork(int i);
+int		init_philos(t_args *args, int number_of_philosophers);
+t_philo	*init_philo(t_args *args, int i, int number_of_philosophers);
 // utils
 int		ft_atoi(const char *str);
 int		isnum(char *str);
 int		verify_arg(char *arg);
 long	get_time(void);
+int		print_msg(t_philo *philo, const char *msg);
 
 #endif
