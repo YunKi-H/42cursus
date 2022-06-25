@@ -6,7 +6,7 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 13:51:47 by yuhwang           #+#    #+#              #
-#    Updated: 2022/06/21 23:53:58 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/06/25 23:39:28 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,11 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -f
 
-SRCS		=	philo.c		\
-				ft_atoi.c	\
+SRCS		=	philo.c			\
+				init.c			\
+				utils.c			\
+				factory.c		\
+				philos_life.c	\
 
 OBJS		=	$(SRCS:.c=.o)
 

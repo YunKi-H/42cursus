@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/25 21:02:21 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/25 23:30:06 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 # include <sys/time.h>
 //gettimeofday
 
-typedef struct s_args t_args;
-typedef struct s_philo t_philo;
-typedef struct s_fork t_fork;
-typedef struct s_monitor t_monitor;
+typedef struct s_args		t_args;
+typedef struct s_philo		t_philo;
+typedef struct s_fork		t_fork;
+typedef struct s_monitor	t_monitor;
 
 struct s_args
 {
@@ -39,7 +39,7 @@ struct s_args
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				number_of_times_each_philosopher_must_eat;
+	int				times_to_eat;
 	long			start_time;
 	int				game_over;
 	t_fork			**forks;
@@ -70,9 +70,9 @@ struct s_fork
 int		philo_factory(t_args *args);
 void	*philo_lifecycle(void *philo);
 void	*monitoting(void *args);
-int	eating(t_philo *philo);
-int	sleeping(t_philo *philo);
-int	thinking(t_philo *philo);
+int		eating(t_philo *philo);
+int		sleeping(t_philo *philo);
+int		thinking(t_philo *philo);
 // init
 int		init_args(t_args *args, int argc, char *argv[]);
 int		init_forks(t_args *args, int number_of_philosophers);
