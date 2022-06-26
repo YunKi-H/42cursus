@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/25 23:30:06 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/26 14:24:11 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # include <sys/time.h>
 //gettimeofday
 
+# define WAIT 200
+
 typedef struct s_args		t_args;
 typedef struct s_philo		t_philo;
 typedef struct s_fork		t_fork;
@@ -41,11 +43,13 @@ struct s_args
 	int				time_to_sleep;
 	int				times_to_eat;
 	long			start_time;
+	pthread_mutex_t	start_line;
 	int				game_over;
+	pthread_mutex_t	someone_dead;
+	pthread_mutex_t	print;
 	t_fork			**forks;
 	t_philo			**philos;
 	pthread_t		monitor;
-	pthread_mutex_t	print;
 };
 
 struct s_philo
@@ -66,24 +70,30 @@ struct s_fork
 	pthread_mutex_t	mutex;
 };
 
-// philos
-int		philo_factory(t_args *args);
-void	*philo_lifecycle(void *philo);
-void	*monitoting(void *args);
-int		eating(t_philo *philo);
-int		sleeping(t_philo *philo);
-int		thinking(t_philo *philo);
 // init
 int		init_args(t_args *args, int argc, char *argv[]);
 int		init_forks(t_args *args, int number_of_philosophers);
 t_fork	*init_fork(int i);
 int		init_philos(t_args *args, int number_of_philosophers);
 t_philo	*init_philo(t_args *args, int i, int number_of_philosophers);
+// philo's life
+int		philo_factory(t_args *args);
+int		philo_cleaner(t_args *args);
+void	*philo_lifecycle(void *philo);
+void	no_country_for_solo_philo(t_philo *philo);
+void	*monitoting(void *args);
+int		eating(t_philo *philo);
+int		sleeping(t_philo *philo);
+int		thinking(t_philo *philo);
 // utils
 int		ft_atoi(const char *str);
-int		isnum(char *str);
 int		verify_arg(char *arg);
 long	get_time(void);
-int		print_msg(t_philo *philo, const char *msg);
+void	set_variable(pthread_mutex_t *mutex, int *varp, int value);
+void	print_msg(t_philo *philo, const char *msg);
+// bool
+int		isnum(char *str);
+int		is_valid_args(t_args *args);
+int		anyone_dead(t_args *args);
 
 #endif

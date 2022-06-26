@@ -6,7 +6,7 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 13:51:47 by yuhwang           #+#    #+#              #
-#    Updated: 2022/06/25 23:39:28 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/06/26 01:09:01 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS		=	philo.c			\
 				utils.c			\
 				factory.c		\
 				philos_life.c	\
+				bool.c			\
 
 OBJS		=	$(SRCS:.c=.o)
 

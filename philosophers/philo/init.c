@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:33:13 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/25 23:30:17 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/26 13:33:13 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ int	init_args(t_args *args, int argc, char *argv[])
 	else
 		args->times_to_eat = INT32_MAX;
 	args->start_time = get_time();
-	if (!args->number_of_philosophers || \
-	!args->time_to_die || \
-	!args->time_to_eat || \
-	!args->time_to_sleep || \
-	!args->times_to_eat)
+	if (!is_valid_args(args))
+		return (1);
+	if (pthread_mutex_init(&args->someone_dead, NULL) < 0)
 		return (1);
 	if (pthread_mutex_init(&args->print, NULL) < 0)
+		return (1);
+	if (pthread_mutex_init(&args->start_line, NULL) < 0)
 		return (1);
 	if (init_forks(args, args->number_of_philosophers))
 		return (1);

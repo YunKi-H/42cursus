@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:20:21 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/25 23:35:08 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/26 14:18:43 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	main(int argc, char *argv[])
 	if (init_args(args, argc, argv))
 		return (write(2, "FATAL ERROR\n", 13));
 	if (philo_factory(args))
+		return (write(2, "FATAL ERROR\n", 13));
+	if (philo_cleaner(args))
 		return (write(2, "FATAL ERROR\n", 13));
 	return (0);
 }
