@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:32:26 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 16:23:41 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:05:54 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	eating(t_philo *philo)
 {
 	if (grab_fork(philo))
 		return (1);
+	pthread_mutex_lock(&philo->meal);
 	philo->last_meal = get_time();
-	philo->eat_count += 1;
+	pthread_mutex_unlock(&philo->meal);
+	set_variable(&philo->count, &philo->eat_count, philo->eat_count + 1);
 	print_msg(philo, "is eating");
 	while (get_time() < philo->last_meal + philo->args->time_to_eat)
 		usleep(WAIT);

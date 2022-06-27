@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:33:13 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/26 13:33:13 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:10:31 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,16 @@ t_philo	*init_philo(t_args *args, int i, int number_of_philos)
 	philo->idx = i;
 	philo->last_meal = get_time();
 	philo->eat_count = 0;
+	if (pthread_mutex_init(&philo->meal, NULL) < 0)
+	{
+		free(philo);
+		return (NULL);
+	}
+	if (pthread_mutex_init(&philo->count, NULL) < 0)
+	{
+		free(philo);
+		return (NULL);
+	}
 	philo->left = args->forks[(i + number_of_philos - 1) % number_of_philos];
 	philo->right = args->forks[i];
 	philo->args = args;

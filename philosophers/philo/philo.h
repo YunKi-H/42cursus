@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 16:23:45 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:01:19 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ struct s_args
 
 struct s_philo
 {
-	pthread_t	thread;
-	int			idx;
-	long		last_meal;
-	int			eat_count;
-	t_fork		*left;
-	t_fork		*right;
-	t_args		*args;
+	pthread_t		thread;
+	int				idx;
+	long			last_meal;
+	pthread_mutex_t	meal;
+	int				eat_count;
+	pthread_mutex_t	count;
+	t_fork			*left;
+	t_fork			*right;
+	t_args			*args;
 };
 
 struct s_fork

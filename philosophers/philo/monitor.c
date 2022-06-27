@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 15:37:09 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 15:38:32 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 18:06:15 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,18 @@ void	*monitoting(void *args)
 		i = -1;
 		while (++i < arg->number_of_philosophers)
 		{
+			pthread_mutex_lock(&arg->philos[i]->meal);
 			if (get_time() > arg->philos[i]->last_meal + arg->time_to_die)
 			{
 				set_variable(&arg->someone_dead, &arg->game_over, 1);
 				print_dying_msg(arg->philos[i], "died");
 				return ((void *)arg->philos[i]);
 			}
+			pthread_mutex_unlock(&arg->philos[i]->meal);
+			pthread_mutex_lock(&arg->philos[i]->count);
 			if (arg->philos[i]->eat_count < arg->times_to_eat)
 				true_ending = 0;
+			pthread_mutex_unlock(&arg->philos[i]->count);
 			usleep(WAIT);
 		}
 		if (true_ending)
