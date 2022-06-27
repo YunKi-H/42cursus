@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:32:26 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 12:34:41 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 14:45:17 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	grab_fork(t_philo *philo)
 		pthread_mutex_lock(&philo->right->mutex);
 		if (!philo->left->status && !philo->right->status)
 		{
+			philo->left->status = 1;
+			philo->right->status = 1;
 			if (anyone_dead(philo->args))
 				return (1);
-			philo->left->status = 1;
 			print_msg(philo, "has taken a fork");
-			philo->right->status = 1;
 			print_msg(philo, "has taken a fork");
 			ready = 1;
 		}
