@@ -6,14 +6,14 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/19 13:51:47 by yuhwang           #+#    #+#              #
-#    Updated: 2022/06/27 17:50:42 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/06/27 18:57:00 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	philo
 
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -fsanitize=thread -g3
+CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -f
 
 SRCS		=	philo.c			\
