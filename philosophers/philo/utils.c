@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:34:18 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/26 14:57:05 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 12:21:20 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ long	get_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void	set_variable(pthread_mutex_t *mutex, int *varp, int value)
+void	*set_variable(pthread_mutex_t *mutex, int *varp, int value)
 {
 	pthread_mutex_lock(mutex);
 	*varp = value;
 	pthread_mutex_unlock(mutex);
+	return (NULL);
 }
 
 void	print_msg(t_philo *philo, const char *msg)

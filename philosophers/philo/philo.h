@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 14:19:50 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/26 14:24:11 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 12:21:26 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		thinking(t_philo *philo);
 int		ft_atoi(const char *str);
 int		verify_arg(char *arg);
 long	get_time(void);
-void	set_variable(pthread_mutex_t *mutex, int *varp, int value);
+void	*set_variable(pthread_mutex_t *mutex, int *varp, int value);
 void	print_msg(t_philo *philo, const char *msg);
 // bool
 int		isnum(char *str);

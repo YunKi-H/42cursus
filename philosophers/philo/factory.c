@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:35:11 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/26 15:11:43 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 12:32:30 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	philo_cleaner(t_args *args)
 	i = 0;
 	if (pthread_join(args->monitor, &monitor))
 		return (1);
+	usleep(WAIT);
 	while (i < args->number_of_philosophers)
 	{
 		if (pthread_join(args->philos[i]->thread, NULL))
@@ -49,8 +50,6 @@ int	philo_cleaner(t_args *args)
 		i += 1;
 		usleep(WAIT);
 	}
-	if (monitor)
-		print_msg((t_philo *)monitor, "died");
 	return (0);
 }
 
@@ -62,7 +61,7 @@ void	*philo_lifecycle(void *philo)
 	pthread_mutex_unlock(&ph->args->start_line);
 	no_country_for_solo_philo(ph);
 	if (ph->idx % 2 == 0)
-		while (get_time() < ph->args->start_time + ph->args->time_to_eat)
+		while (get_time() <= ph->args->start_time + ph->args->time_to_eat)
 			usleep(WAIT);
 	while (1)
 	{
@@ -91,9 +90,10 @@ void	*monitoting(void *args)
 		i = -1;
 		while (++i < arg->number_of_philosophers)
 		{
-			if (get_time() >= arg->philos[i]->last_meal + arg->time_to_die)
+			if (get_time() > arg->philos[i]->last_meal + arg->time_to_die)
 			{
 				set_variable(&arg->someone_dead, &arg->game_over, 1);
+				print_msg(arg->philos[i], "died");
 				return ((void *)arg->philos[i]);
 			}
 			if (arg->philos[i]->eat_count < arg->times_to_eat)
@@ -101,10 +101,7 @@ void	*monitoting(void *args)
 			usleep(WAIT);
 		}
 		if (true_ending)
-		{
-			set_variable(&arg->someone_dead, &arg->game_over, 1);
-			return (NULL);
-		}
+			return (set_variable(&arg->someone_dead, &arg->game_over, 1));
 	}
 }
 
@@ -116,7 +113,7 @@ void	no_country_for_solo_philo(t_philo *philo)
 	{
 		set_variable(&philo->left->mutex, &philo->left->status, 1);
 		print_msg(philo, "has taken a fork");
-		while (get_time() < now + philo->args->time_to_die)
+		while (get_time() <= now + philo->args->time_to_die)
 			usleep(WAIT);
 	}
 	usleep(WAIT);
