@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:32:26 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 14:45:17 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:47:12 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	grab_fork(t_philo *philo)
 		{
 			philo->left->status = 1;
 			philo->right->status = 1;
-			if (anyone_dead(philo->args))
-				return (1);
 			print_msg(philo, "has taken a fork");
 			print_msg(philo, "has taken a fork");
 			ready = 1;
@@ -55,8 +53,6 @@ int	eating(t_philo *philo)
 		return (1);
 	philo->last_meal = get_time();
 	philo->eat_count += 1;
-	if (anyone_dead(philo->args))
-		return (1);
 	print_msg(philo, "is eating");
 	while (get_time() < philo->last_meal + philo->args->time_to_eat)
 		usleep(WAIT);
@@ -68,8 +64,6 @@ int	sleeping(t_philo *philo)
 {
 	const long	now = get_time();
 
-	if (anyone_dead(philo->args))
-		return (1);
 	print_msg(philo, "is sleeping");
 	while (get_time() < now + philo->args->time_to_sleep)
 		usleep(WAIT);
@@ -78,8 +72,6 @@ int	sleeping(t_philo *philo)
 
 int	thinking(t_philo *philo)
 {
-	if (anyone_dead(philo->args))
-		return (1);
 	print_msg(philo, "is thinking");
 	return (0);
 }

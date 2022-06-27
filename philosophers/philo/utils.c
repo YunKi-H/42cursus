@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 22:34:18 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 12:21:20 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:21:55 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ void	*set_variable(pthread_mutex_t *mutex, int *varp, int value)
 void	print_msg(t_philo *philo, const char *msg)
 {
 	pthread_mutex_lock(&philo->args->print);
-	printf(
-		"%ld %d %s\n", \
-		get_time() - philo->args->start_time, \
-		philo->idx + 1, \
-		msg
-		);
+	if (!anyone_dead(philo->args))
+		printf(
+			"%ld %d %s\n", \
+			get_time() - philo->args->start_time, \
+			philo->idx + 1, \
+			msg
+			);
 	pthread_mutex_unlock(&philo->args->print);
 }

@@ -6,7 +6,7 @@
 /*   By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 23:35:11 by yuhwang           #+#    #+#             */
-/*   Updated: 2022/06/27 14:35:46 by yuhwang          ###   ########.fr       */
+/*   Updated: 2022/06/27 15:46:18 by yuhwang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	philo_factory(t_args *args)
 		i += 1;
 		usleep(WAIT);
 	}
+	args->start_time = get_time();
 	if (pthread_create(&args->monitor, NULL, monitoting, args))
 		return (1);
-	args->start_time = get_time();
 	pthread_mutex_unlock(&args->start_line);
 	return (0);
 }
@@ -61,14 +61,14 @@ void	*philo_lifecycle(void *philo)
 	pthread_mutex_unlock(&ph->args->start_line);
 	no_country_for_solo_philo(ph);
 	if (ph->idx % 2 == 0)
-		while (get_time() <= ph->args->start_time + ph->args->time_to_eat)
+		while (get_time() < ph->args->start_time + ph->args->time_to_eat)
 			usleep(WAIT);
 	while (1)
 	{
 		usleep(WAIT);
 		if (anyone_dead(ph->args))
 			break ;
-		if (eating(ph))
+		if (eating(ph) || anyone_dead(ph->args))
 			break ;
 		if (sleeping(ph) || usleep(WAIT))
 			break ;
@@ -76,33 +76,6 @@ void	*philo_lifecycle(void *philo)
 			break ;
 	}
 	return (philo);
-}
-
-void	*monitoting(void *args)
-{
-	t_args *const	arg = (t_args *)args;
-	int				i;
-	int				true_ending;
-
-	while (1)
-	{
-		true_ending = 1;
-		i = -1;
-		while (++i < arg->number_of_philosophers)
-		{
-			if (get_time() > arg->philos[i]->last_meal + arg->time_to_die)
-			{
-				set_variable(&arg->someone_dead, &arg->game_over, 1);
-				print_msg(arg->philos[i], "died");
-				return ((void *)arg->philos[i]);
-			}
-			if (arg->philos[i]->eat_count < arg->times_to_eat)
-				true_ending = 0;
-			usleep(WAIT);
-		}
-		if (true_ending)
-			return (set_variable(&arg->someone_dead, &arg->game_over, 1));
-	}
 }
 
 void	no_country_for_solo_philo(t_philo *philo)
