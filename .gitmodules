@@ -1,3 +1,6 @@
 [submodule "minishell"]
 	path = minishell
 	url = git@github.com:YunKi-H/minishell.git
+[submodule "miniRT"]
+	path = miniRT
+	url = git@github.com:YunKi-H/miniRT.git
