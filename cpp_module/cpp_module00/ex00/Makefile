@@ -6,14 +6,14 @@
 #    By: yuhwang <yuhwang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/03 19:22:53 by yuhwang           #+#    #+#              #
-#    Updated: 2022/08/03 19:22:53 by yuhwang          ###   ########.fr        #
+#    Updated: 2022/08/04 14:28:41 by yuhwang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	megaphone
 
-CPP			=	c++
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CXX			=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 RM			=	rm -f
 
 SRCS		=	megaphone.cpp	\
@@ -21,12 +21,12 @@ SRCS		=	megaphone.cpp	\
 OBJS		=	$(SRCS:.cpp=.o)
 
 $(NAME)		:	$(OBJS)
-				$(CPP) $(CPPFLAGS) -o $@ $^
+				$(CXX) $(CXXFLAGS) -o $@ $^
 
 all			:	$(NAME)
 
 %.o			:	$.cpp
-				$(CPP) $(CPPFLAGS) -o $@ -c $< -I.
+				$(CXX) $(CXXFLAGS) -o $@ -c $< -I.
 
 clean		:
 				$(RM) $(OBJS)
