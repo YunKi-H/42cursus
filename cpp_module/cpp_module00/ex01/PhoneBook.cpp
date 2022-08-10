@@ -25,7 +25,7 @@ void PhoneBook::printInStyle(std::string str) {
 	std::cout << str << '|';
 }
 
-void PhoneBook::printContact(int index) {
+void PhoneBook::printContact(int index) const {
 	std::cout << "First name     : " << this->_contacts[index].getFirstName() << std::endl;
 	std::cout << "Last name      : " << this->_contacts[index].getLastName() << std::endl;
 	std::cout << "Nick name      : " << this->_contacts[index].getNickName() << std::endl;
