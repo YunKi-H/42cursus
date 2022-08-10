@@ -22,7 +22,7 @@ std::string Contact::getDarkestSceret() {
 	return (this->_darkestSecret);
 }
 
-Contact::Contact(
+void Contact::setContact(
 	std::string	firstName,
 	std::string	lastName,
 	std::string	nickName,
@@ -37,9 +37,12 @@ Contact::Contact(
 }
 
 Contact::Contact() {
-	std::cout << "New Contact added" << std::endl;
+	this->_firstName = "";
+	this->_lastName = "";
+	this->_nickName = "";
+	this->_phoneNumber = "";
+	this->_darkestSecret = "";
 }
 
 Contact::~Contact() {
-	std::cout << this->_nickName << " has removed" << std::endl;
 }

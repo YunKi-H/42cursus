@@ -16,7 +16,7 @@ public:
 	std::string	getNickName();
 	std::string	getPhoneNumber();
 	std::string	getDarkestSceret();
-	Contact(
+	void setContact(
 		std::string	firstName,
 		std::string	lastName,
 		std::string	nickName,
