@@ -13,7 +13,7 @@ $(NAME)		:	$(OBJS)
 
 all			:	$(NAME)
 
-%.o			:	$.cpp
+%.o			:	%.cpp
 				$(CXX) $(CXXFLAGS) -o $@ -c $< -I.
 
 clean		:
