@@ -4,6 +4,7 @@
 int main() {
 	std::cout << "-----Default Zombie-----\n" << std::endl;
 	Zombie z1 = Zombie();
+	z1.announce();
 
 	std::cout << "------Named Zombie------\n" << std::endl;
 	Zombie z2 = Zombie("Named Zombie");
