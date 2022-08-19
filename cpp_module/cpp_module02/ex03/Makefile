@@ -7,6 +7,8 @@ RM			=	rm -f
 
 SRCS		=	main.cpp		\
 				Fixed.cpp		\
+				bsp.cpp			\
+				Point.cpp		\
 
 OBJS		=	$(SRCS:.cpp=.o)
 
