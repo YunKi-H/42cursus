@@ -4,7 +4,11 @@
 int main() {
 	ClapTrap a("ClapTrapA");
 	ClapTrap b("ClapTrapB");
+	ClapTrap c(b);
 
+	c.announce();
+	c.setName("ClapTrapC");
+	c.announce();
 	a.announce();
 	b.announce();
 	a.attack(b.getName());
@@ -16,4 +20,5 @@ int main() {
 	b.beRepaired(10);
 	a.announce();
 	b.announce();
+	c.announce();
 }
