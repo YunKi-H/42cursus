@@ -23,9 +23,9 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &rhs) {
 
 void ClapTrap::announce() const {
 	std::cout << "ClapTrap [" << this->_name << "]" << std::endl;
-	std::cout << "  Hit Point     :" << this->_hp << std::endl;
-	std::cout << "  Energy Point  :" << this->_ep << std::endl;
-	std::cout << "  Attack Damage :" << this->_ad << std::endl;
+	std::cout << "Hit Point     :" << this->_hp << std::endl;
+	std::cout << "Energy Point  :" << this->_ep << std::endl;
+	std::cout << "Attack Damage :" << this->_ad << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target) {
