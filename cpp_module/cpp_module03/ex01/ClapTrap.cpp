@@ -1,16 +1,20 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() : _name("a ClapTrap"), _hp(10), _ep(10), _ad(0) {
+	std::cout << "ClapTrap [" << this->_name << "] generated!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
+	std::cout << "ClapTrap [" << this->_name << "] generated!" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& clapTrap) {
 	*this = clapTrap;
+	std::cout << "ClapTrap [" << this->_name << "] generated!" << std::endl;
 }
 
 ClapTrap::~ClapTrap() {
+	std::cout << "ClapTrap [" << this->_name << "] destroyed!" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &rhs) {
