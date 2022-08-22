@@ -13,7 +13,11 @@ private:
 	unsigned int _ad;
 public:
 	ScavTrap();
+	ScavTrap(const std::string name);
+	ScavTrap(const ScavTrap& scavTrap);
 	~ScavTrap();
+
+	void guardGate() const;
 };
 
 #endif
