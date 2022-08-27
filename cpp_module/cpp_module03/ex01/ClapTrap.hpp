@@ -5,7 +5,12 @@
 #include <string>
 
 class ClapTrap {
-private:
+protected:
+	static const std::string _unitType;
+	static const unsigned int _unitHp = 10;
+	static const unsigned int _unitEp = 10;
+	static const unsigned int _unitAd = 0;
+
 	std::string _name;
 	unsigned int _hp;
 	unsigned int _ep;
@@ -14,12 +19,12 @@ public:
 	ClapTrap();
 	ClapTrap(const std::string name);
 	ClapTrap(const ClapTrap& clapTrap);
-	~ClapTrap();
+	virtual ~ClapTrap();
 
 	ClapTrap &operator=(const ClapTrap &rhs);
 
 	void announce() const;
-	void attack(const std::string& target);
+	virtual void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 
