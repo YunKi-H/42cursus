@@ -27,6 +27,7 @@ int main() {
 	a.announce();
 	b.announce();
 	c.announce();
+
 	// ClapTrap a("ClapTrapA");
 	// ClapTrap b("ClapTrapB");
 	// ClapTrap c(b);
