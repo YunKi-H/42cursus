@@ -17,7 +17,7 @@ protected:
 	unsigned int _ad;
 public:
 	ClapTrap();
-	ClapTrap(const std::string name);
+	ClapTrap(const std::string& name);
 	ClapTrap(const ClapTrap& clapTrap);
 	virtual ~ClapTrap();
 
@@ -28,11 +28,15 @@ public:
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 
-	std::string getName() const;
+	virtual std::string getUnitType() const;
+	virtual unsigned int getUnitHp() const;
+	virtual unsigned int getUnitEp() const;
+	virtual unsigned int getUnitAd() const;
+	virtual std::string getName() const;
 	unsigned int getHp() const;
 	unsigned int getEp() const;
 	unsigned int getAd() const;
-	void setName(std::string name);
+	virtual void setName(std::string name);
 	void setHp(unsigned int hitPoint);
 	void setEp(unsigned int energyPoint);
 	void setAd(unsigned int attackDamage);

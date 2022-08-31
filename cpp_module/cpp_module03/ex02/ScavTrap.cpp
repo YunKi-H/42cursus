@@ -56,3 +56,19 @@ void ScavTrap::guardGate() const {
 	std::cout << this->_unitType << " [" << this->_name
 	<< "] is now on Gatekeeper Mode!" << std::endl;
 }
+
+std::string ScavTrap::getUnitType() const {
+	return this->_unitType;
+}
+
+unsigned int ScavTrap::getUnitHp() const {
+	return this->_unitHp;
+}
+
+unsigned int ScavTrap::getUnitEp() const {
+	return this->_unitEp;
+}
+
+unsigned int ScavTrap::getUnitAd() const {
+	return this->_unitAd;
+}

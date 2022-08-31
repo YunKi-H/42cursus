@@ -5,12 +5,12 @@
 #include "DiamondTrap.hpp"
 
 int main() {
-	FragTrap a("FragTrapA");
-	FragTrap b("FragTrapB");
-	FragTrap c(b);
+	DiamondTrap a("DiamondTrapA");
+	DiamondTrap b("DiamondTrapB");
+	DiamondTrap c(b);
 
 	c.announce();
-	c.setName("FragTrapC");
+	c.setName("DiamondTrapC");
 	c.announce();
 	a.announce();
 	b.announce();
@@ -29,7 +29,33 @@ int main() {
 	a.announce();
 	b.announce();
 	c.announce();
-	c.highFivesGuys();
+	c.whoAmI();
+
+	// FragTrap a("FragTrapA");
+	// FragTrap b("FragTrapB");
+	// FragTrap c(b);
+
+	// c.announce();
+	// c.setName("FragTrapC");
+	// c.announce();
+	// a.announce();
+	// b.announce();
+	// std::cout << std::endl;
+	// a.attack(b.getName());
+	// b.takeDamage(a.getAd());
+	// b.announce();
+	// a.takeDamage(5);
+	// a.beRepaired(3);
+	// a.announce();
+	// std::cout << std::endl;
+	// b.attack("A Hard Rock");
+	// b.takeDamage(b.getHp());
+	// b.beRepaired(10);
+	// std::cout << std::endl;
+	// a.announce();
+	// b.announce();
+	// c.announce();
+	// c.highFivesGuys();
 
 	// ScavTrap a("ScavTrapA");
 	// ScavTrap b("ScavTrapB");

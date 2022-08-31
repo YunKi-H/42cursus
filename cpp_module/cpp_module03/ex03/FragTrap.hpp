@@ -14,7 +14,7 @@ protected:
 
 public:
 	FragTrap();
-	FragTrap(const std::string name);
+	FragTrap(const std::string& name);
 	FragTrap(const FragTrap& fragTrap);
 	virtual ~FragTrap();
 
@@ -22,6 +22,11 @@ public:
 
 	virtual void attack(const std::string& target);
 	void highFivesGuys() const;
+
+	virtual std::string getUnitType() const;
+	virtual unsigned int getUnitHp() const;
+	virtual unsigned int getUnitEp() const;
+	virtual unsigned int getUnitAd() const;
 };
 
 #endif

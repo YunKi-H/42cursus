@@ -28,6 +28,10 @@ public:
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 
+	virtual std::string getUnitType() const;
+	virtual unsigned int getUnitHp() const;
+	virtual unsigned int getUnitEp() const;
+	virtual unsigned int getUnitAd() const;
 	std::string getName() const;
 	unsigned int getHp() const;
 	unsigned int getEp() const;

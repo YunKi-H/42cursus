@@ -56,3 +56,19 @@ void FragTrap::highFivesGuys() const {
 	std::cout << this->_unitType << " [" << this->_name
 	<< "] ask High Fives to you!" << std::endl;
 }
+
+std::string FragTrap::getUnitType() const {
+	return this->_unitType;
+}
+
+unsigned int FragTrap::getUnitHp() const {
+	return this->_unitHp;
+}
+
+unsigned int FragTrap::getUnitEp() const {
+	return this->_unitEp;
+}
+
+unsigned int FragTrap::getUnitAd() const {
+	return this->_unitAd;
+}

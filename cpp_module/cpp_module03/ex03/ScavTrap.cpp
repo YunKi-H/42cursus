@@ -2,29 +2,29 @@
 
 const std::string ScavTrap::_unitType = "ScavTrap";
 
-ScavTrap::ScavTrap() {
-	this->_name = "a ScavTrap";
+ScavTrap::ScavTrap() : ClapTrap("a ScavTrap") {
+	// this->_name = "a ScavTrap";
 	this->_hp = this->_unitHp;
 	this->_ep = this->_unitEp;
 	this->_ad = this->_unitAd;
-	std::cout << this->_unitType << " [" << this->_name << "] generated!" << std::endl;
+	std::cout << this->getUnitType() << " [" << this->_name << "] generated!" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string name) {
-	this->_name = name;
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name) {
+	// this->_name = name;
 	this->_hp = this->_unitHp;
 	this->_ep = this->_unitEp;
 	this->_ad = this->_unitAd;
-	std::cout << this->_unitType << " [" << this->_name << "] generated!" << std::endl;
+	std::cout << this->getUnitType() << " [" << this->_name << "] generated!" << std::endl;
 }
 
 ScavTrap::ScavTrap(const ScavTrap& scavTrap) {
 	*this = scavTrap;
-	std::cout << this->_unitType << " [" << this->_name << "] generated!" << std::endl;
+	std::cout << this->getUnitType() << " [" << this->_name << "] generated!" << std::endl;
 }
 
 ScavTrap::~ScavTrap() {
-	std::cout << this->_unitType << " [" << this->_name << "] destroyed!" << std::endl;
+	std::cout << this->getUnitType() << " [" << this->getName() << "] destroyed!" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &rhs) {
@@ -37,13 +37,13 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &rhs) {
 
 void ScavTrap::attack(const std::string& target) {
 	if (!this->_hp || !this->_ep) {
-		std::cout << this->_unitType << " ["
+		std::cout << this->getUnitType() << " ["
 		<< this->_name
 		<< "] can`t move anymore!" << std::endl;
 		return;
 	}
-	std::cout << this->_unitType << " ["
-	<< this->_name
+	std::cout << this->getUnitType() << " ["
+	<< this->getName()
 	<< "] makes a strong attack to ["
 	<< target
 	<< "], causing "
@@ -53,6 +53,22 @@ void ScavTrap::attack(const std::string& target) {
 }
 
 void ScavTrap::guardGate() const {
-	std::cout << this->_unitType << " [" << this->_name
+	std::cout << this->getUnitType() << " [" << this->_name
 	<< "] is now on Gatekeeper Mode!" << std::endl;
+}
+
+std::string ScavTrap::getUnitType() const {
+	return this->_unitType;
+}
+
+unsigned int ScavTrap::getUnitHp() const {
+	return this->_unitHp;
+}
+
+unsigned int ScavTrap::getUnitEp() const {
+	return this->_unitEp;
+}
+
+unsigned int ScavTrap::getUnitAd() const {
+	return this->_unitAd;
 }

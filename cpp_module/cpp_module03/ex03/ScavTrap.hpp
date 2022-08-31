@@ -14,7 +14,7 @@ protected:
 
 public:
 	ScavTrap();
-	ScavTrap(const std::string name);
+	ScavTrap(const std::string& name);
 	ScavTrap(const ScavTrap& scavTrap);
 	virtual ~ScavTrap();
 
@@ -22,6 +22,11 @@ public:
 
 	virtual void attack(const std::string& target);
 	void guardGate() const;
+
+	virtual std::string getUnitType() const;
+	virtual unsigned int getUnitHp() const;
+	virtual unsigned int getUnitEp() const;
+	virtual unsigned int getUnitAd() const;
 };
 
 #endif
