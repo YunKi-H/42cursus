@@ -71,6 +71,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	<< amount
 	<< " points of HP!" << std::endl;
 	this->_hp += amount;
+	this->_ep -= 1;
 }
 
 std::string ClapTrap::getName() const {
