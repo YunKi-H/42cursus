@@ -16,6 +16,8 @@ public:
 	Dog &operator=(const Dog &rhs);
 
 	virtual void makeSound() const;
+
+	const Brain *getBrain() const;
 };
 
 #endif

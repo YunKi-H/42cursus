@@ -35,3 +35,7 @@ Dog &Dog::operator=(const Dog &rhs) {
 void Dog::makeSound() const {
 	std::cout << this->_className << " [" << this->_type << "] : Bark" << std::endl;
 }
+
+const Brain *Dog::getBrain() const {
+	return this->_brain;
+}
