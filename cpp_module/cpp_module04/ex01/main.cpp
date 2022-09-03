@@ -12,8 +12,7 @@ int main() {
 
 	std::cout << std::endl;
 	Cat* a = new Cat();
-	Cat* b = new Cat();
-	*b = *a;
+	Cat* b = new Cat(*a);
 	for (int i = 0; i < 3; i++) {
 		b->getBrain()->setIdea(i, "new Idea");
 	}

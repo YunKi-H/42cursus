@@ -10,10 +10,6 @@ Dog::Dog() {
 
 Dog::Dog(const Dog &dog) {
 	*this = dog;
-	this->_brain = new Brain();
-	for (int i = 0; i < this->_brain->getCapacity(); ++i) {
-		this->_brain->setIdea(i, dog._brain->getIdea(i));
-	}
 	std::cout << this->_className << " [" << this->_type << "] is born!" << std::endl;
 }
 

@@ -10,10 +10,6 @@ Cat::Cat() {
 
 Cat::Cat(const Cat &cat) {
 	*this = cat;
-	this->_brain = new Brain();
-	for (int i = 0; i < this->_brain->getCapacity(); ++i) {
-		this->_brain->setIdea(i, cat._brain->getIdea(i));
-	}
 	std::cout << this->_className << " [" << this->_type << "] is born!" << std::endl;
 }
 
