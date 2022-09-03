@@ -3,16 +3,16 @@
 const std::string WrongAnimal::_className = "WrongAnimal";
 
 WrongAnimal::WrongAnimal() : _type(this->_className) {
-	std::cout << "[" << this->_type << "] is born!" << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] is born!" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal &wrongAnimal) {
 	*this = wrongAnimal;
-	std::cout << "[" << this->_type << "] is born!" << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] is born!" << std::endl;
 }
 
 WrongAnimal::~WrongAnimal() {
-	std::cout << "[" << this->_type << "] is died.." << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] is died.." << std::endl;
 }
 
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &rhs) {
@@ -21,7 +21,7 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &rhs) {
 }
 
 void WrongAnimal::makeSound() const {
-	std::cout << "[" << this->_type << "] : ..." << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] : ..." << std::endl;
 }
 
 std::string WrongAnimal::getType() const {

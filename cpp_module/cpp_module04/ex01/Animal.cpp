@@ -3,16 +3,16 @@
 const std::string Animal::_className = "Animal";
 
 Animal::Animal() : _type(this->_className) {
-	std::cout << "[" << this->_type << "] is born!" << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] is born!" << std::endl;
 }
 
 Animal::Animal(const Animal &animal) {
 	*this = animal;
-	std::cout << "[" << this->_type << "] is born!" << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] is born!" << std::endl;
 }
 
 Animal::~Animal() {
-	std::cout << "[" << this->_type << "] is died.." << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] is died.." << std::endl;
 }
 
 Animal &Animal::operator=(const Animal &rhs) {
@@ -21,7 +21,7 @@ Animal &Animal::operator=(const Animal &rhs) {
 }
 
 void Animal::makeSound() const {
-	std::cout << "[" << this->_type << "] : ..." << std::endl;
+	std::cout << this->_className << " [" << this->_type << "] : ..." << std::endl;
 }
 
 std::string Animal::getType() const {
