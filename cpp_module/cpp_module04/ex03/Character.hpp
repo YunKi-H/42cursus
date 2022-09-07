@@ -18,7 +18,8 @@ public:
 
 	Character &operator=(const Character &rhs);
 
-	std::string const &getName() const;
+	const AMateria *getMateria(const int idx) const;
+	const std::string &getName() const;
 	void equip(AMateria* m);
 	void unequip(int idx);
 	void use(int idx, ICharacter &target);
