@@ -7,11 +7,9 @@ RM			=	rm -f
 
 SRCS		=	main.cpp			\
 				AMateria.cpp		\
-				ICharacter.cpp		\
 				Character.cpp		\
 				Cure.cpp			\
 				Ice.cpp				\
-				IMateriaSource.cpp	\
 				MateriaSource.cpp	\
 
 OBJS		=	$(SRCS:.cpp=.o)
