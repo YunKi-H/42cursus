@@ -7,7 +7,6 @@
 
 class MateriaSource : public IMateriaSource {
 private:
-	static const std::string _className;
 	static const int _materiaSlotCap = 4;
 
 	AMateria *_materias[MateriaSource::_materiaSlotCap];
@@ -19,6 +18,7 @@ public:
 
 	MateriaSource &operator=(const MateriaSource &rhs);
 
+	const AMateria *getMateria(const int idx) const;
 	void learnMateria(AMateria *materia);
 	AMateria *createMateria(std::string const &type);
 };

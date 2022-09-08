@@ -7,7 +7,6 @@
 
 class Ice : public AMateria {
 private:
-	static const std::string _className;
 	static const std::string _materiaName;
 
 public:

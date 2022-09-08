@@ -1,21 +1,16 @@
 #include "AMateria.hpp"
 
-const std::string AMateria::_className = "AMateria";
-
 AMateria::AMateria() : _type("a Materia") {
-	// std::cout << this->_className << " [" << this->_type << "] generated!" << std::endl;
 }
 
 AMateria::AMateria(const AMateria &amateria) {
-	// std::cout << this->_className << " [" << this->_type << "] generated!" << std::endl;
+	this->_type = amateria.getType();
 }
 
 AMateria::AMateria(std::string const & type) : _type(type) {
-	// std::cout << this->_className << " [" << this->_type << "] generated!" << std::endl;
 }
 
 AMateria::~AMateria() {
-	// std::cout << this->_className << " [" << this->_type << "] destructed!" << std::endl;
 }
 
 AMateria &AMateria::operator=(const AMateria &rhs) {
@@ -27,7 +22,11 @@ std::string const &AMateria::getType() const {
 	return this->_type;
 }
 
+AMateria* AMateria::clone() const {
+	return NULL;
+}
+
 void AMateria::use(ICharacter& target) {
-	// std::cout << this->_className << " [" << this->_type << "] is used to ["
-	// << target.getName() << "]" << std::endl;
+	std::cout << this->getType()
+	<< " is used to " << target.getName() << std::endl;
 }

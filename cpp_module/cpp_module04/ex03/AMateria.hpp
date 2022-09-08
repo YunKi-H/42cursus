@@ -1,12 +1,14 @@
 #ifndef AMATERIA_HPP
 # define AMATERIA_HPP
 
+#include <iostream>
 #include <string>
 #include "ICharacter.hpp"
 
+class ICharacter;
+
 class AMateria {
 protected:
-	static const std::string _className;
 	std::string _type;
 
 public:
@@ -21,4 +23,5 @@ public:
 	virtual AMateria* clone() const = 0;
 	virtual void use(ICharacter& target);
 };
+
 #endif

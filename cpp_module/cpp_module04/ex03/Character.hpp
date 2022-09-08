@@ -1,11 +1,14 @@
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
+#include <iostream>
+#include <string>
 #include "ICharacter.hpp"
+
+class AMateria;
 
 class Character : public ICharacter {
 private:
-	static const std::string _className;
 	static const int _materiaSlotCap = 4;
 
 	std::string _name;
