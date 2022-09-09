@@ -30,8 +30,8 @@ const int &Bureaucrat::getGrade() const {
 void Bureaucrat::increGrade(const int &amount) {
 	try {
 		this->_grade -= amount;
-		if (this->_grade < 1) {
-			this->_grade = 1;
+		if (this->_grade < Bureaucrat::_gradeHighest) {
+			this->_grade = Bureaucrat::_gradeHighest;
 			throw Bureaucrat::GradeTooHighException();
 		}
 	} catch(const std::exception& e) {
@@ -42,8 +42,8 @@ void Bureaucrat::increGrade(const int &amount) {
 void Bureaucrat::decreGrade(const int &amount) {
 	try {
 		this->_grade += amount;
-		if (this->_grade > 150) {
-			this->_grade = 150;
+		if (this->_grade > Bureaucrat::_gradeLowest) {
+			this->_grade = Bureaucrat::_gradeLowest;
 			throw Bureaucrat::GradeTooLowException();
 		}
 	} catch(const std::exception& e) {
