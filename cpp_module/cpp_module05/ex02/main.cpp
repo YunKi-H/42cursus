@@ -46,4 +46,5 @@ int main() {
 	std::cout << std::endl;
 	PresidentialPardonForm p("poor Jean");
 	b.executeForm(p);
+	a.executeForm(p);
 }
