@@ -62,10 +62,16 @@ const int &Form::getGradeToExcute() const {
 }
 
 void Form::beSigned(const Bureaucrat &bureaucrat) {
-	if (bureaucrat.getGrade() > this->_gradeToSign) {
+	if (bureaucrat.getGrade() > this->getGradeToSign()) {
 		throw Form::GradeTooLowException();
 	}
 	this->_isSigned = true;
+}
+
+void Form::execute(const Bureaucrat &excutor) const {
+	if (excutor.getGrade() > this->getGradeToExcute()) {
+		throw Form::GradeTooLowException();
+	}
 }
 
 const char *Form::GradeTooHighException::what() const throw() {
