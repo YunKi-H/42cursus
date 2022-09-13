@@ -5,6 +5,8 @@
 #include <string>
 #include <exception>
 
+class Form;
+
 class Bureaucrat {
 private:
 	static const int _gradeHighest = 1;
@@ -15,7 +17,7 @@ private:
 
 public:
 	Bureaucrat();
-	Bureaucrat(const std::string &name);
+	Bureaucrat(const std::string &name, const int &grade);
 	Bureaucrat(const Bureaucrat &bureaucrat);
 	virtual ~Bureaucrat();
 
@@ -23,8 +25,10 @@ public:
 
 	const std::string &getName() const;
 	const int &getGrade() const;
-	void increGrade(const int &amount);
-	void decreGrade(const int &amount);
+	void increGrade();
+	void decreGrade();
+	void signForm(const Form &form);
+	void executeForm(const Form &form);
 
 	class GradeTooHighException : public std::exception {
 		const char *what() const throw();

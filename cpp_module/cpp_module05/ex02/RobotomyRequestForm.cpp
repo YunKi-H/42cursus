@@ -31,6 +31,7 @@ void RobotomyRequestForm::execute(const Bureaucrat &excutor) const {
 	struct timeval	time;
 	gettimeofday(&time, NULL);
 	srand(time.tv_usec);
+	std::cout << "Drilllllllllll" << std::endl;
 	if (rand() % 2 == 0) {
 		std::cout << this->_target << " robotomized SUCCESS!" << std::endl;
 	} else {

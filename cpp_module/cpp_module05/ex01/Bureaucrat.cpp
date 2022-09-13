@@ -3,7 +3,7 @@
 Bureaucrat::Bureaucrat() : _name("a Bureaucrat"), _grade(Bureaucrat::_gradeLowest) {
 }
 
-Bureaucrat::Bureaucrat(const std::string &name) : _name(name), _grade(Bureaucrat::_gradeLowest) {
+Bureaucrat::Bureaucrat(const std::string &name, const int &grade) : _name(name), _grade(grade) {
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) {
@@ -27,9 +27,9 @@ const int &Bureaucrat::getGrade() const {
 	return this->_grade;
 }
 
-void Bureaucrat::increGrade(const int &amount) {
+void Bureaucrat::increGrade() {
 	try {
-		this->_grade -= amount;
+		this->_grade -= 1;
 		if (this->_grade < Bureaucrat::_gradeHighest) {
 			this->_grade = Bureaucrat::_gradeHighest;
 			throw Bureaucrat::GradeTooHighException();
@@ -39,9 +39,9 @@ void Bureaucrat::increGrade(const int &amount) {
 	}
 }
 
-void Bureaucrat::decreGrade(const int &amount) {
+void Bureaucrat::decreGrade() {
 	try {
-		this->_grade += amount;
+		this->_grade += 1;
 		if (this->_grade > Bureaucrat::_gradeLowest) {
 			this->_grade = Bureaucrat::_gradeLowest;
 			throw Bureaucrat::GradeTooLowException();
@@ -57,6 +57,16 @@ void Bureaucrat::signForm(const Form &form) {
 		std::cout << this->getName() << " signed " << form.getName() << std::endl;
 	} catch(const std::exception& e) {
 		std::cerr << this->getName() << " couldn't signed "
+		<< form.getName() << " because " << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm(const Form &form) {
+	try {
+		form.execute(*this);
+		std::cout << this->getName() << " excuted " << form.getName() << std::endl;
+	} catch(const std::exception& e) {
+		std::cerr << this->getName() << " couldn't excuted "
 		<< form.getName() << " because " << e.what() << std::endl;
 	}
 }

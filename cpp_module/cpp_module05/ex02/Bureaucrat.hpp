@@ -18,7 +18,7 @@ private:
 
 public:
 	Bureaucrat();
-	Bureaucrat(const std::string &name);
+	Bureaucrat(const std::string &name, const int &grade);
 	Bureaucrat(const Bureaucrat &bureaucrat);
 	virtual ~Bureaucrat();
 
@@ -26,8 +26,8 @@ public:
 
 	const std::string &getName() const;
 	const int &getGrade() const;
-	void increGrade(const int &amount);
-	void decreGrade(const int &amount);
+	void increGrade();
+	void decreGrade();
 	void signForm(const Form &form);
 	void executeForm(const Form &form);
 
