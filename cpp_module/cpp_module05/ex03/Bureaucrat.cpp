@@ -9,7 +9,7 @@ Bureaucrat::Bureaucrat(const std::string &name, const int &grade) : _name(name),
 			this->_grade = Bureaucrat::_gradeHighest;
 			throw Bureaucrat::GradeTooHighException();
 		}
-		if (this->_grade > Bureaucrat::_gradeHighest) {
+		if (this->_grade > Bureaucrat::_gradeLowest) {
 			this->_grade = Bureaucrat::_gradeLowest;
 			throw Bureaucrat::GradeTooLowException();
 		}
