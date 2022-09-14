@@ -54,16 +54,20 @@ int main() {
 
 	Intern intern;
 	Form *form = intern.makeForm("ShrubberyCreationForm", "home");
+	b.signForm(*form);
 	b.executeForm(*form);
 	delete form;
 	std::cout << std::endl;
 	form = intern.makeForm("RobotomyRequestForm", "sad Tommy");
+	b.signForm(*form);
 	for (int i = 0; i < 4; i++) {
 		b.executeForm(*form);
 	}
 	delete form;
 	std::cout << std::endl;
 	form = intern.makeForm("PresidentialPardonForm", "poor Jean");
+	b.executeForm(*form);
+	b.signForm(*form);
 	b.executeForm(*form);
 	a.executeForm(*form);
 	std::cout << std::endl;

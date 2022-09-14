@@ -39,6 +39,9 @@ void ShrubberyCreationForm::execute(const Bureaucrat &excutor) const {
 	if (excutor.getGrade() > this->getGradeToSign()) {
 		throw Form::GradeTooLowException();
 	}
+	if (this->getIsSigned() == 0) {
+		throw Form::UnSignedException();
+	}
 	std::ofstream output(this->_target + "_shrubbery");
 	if (output.fail()) {
 		std::cerr << "FILE OPEN FAILED" << std::endl;

@@ -38,14 +38,18 @@ int main() {
 	// std::cout << formA << std::endl;
 	// std::cout << formB << std::endl;
 	ShrubberyCreationForm s("home");
+	b.signForm(s);
 	b.executeForm(s);
 	std::cout << std::endl;
 	RobotomyRequestForm r("sad Tommy");
+	b.signForm(r);
 	for (int i = 0; i < 4; i++) {
 		b.executeForm(r);
 	}
 	std::cout << std::endl;
 	PresidentialPardonForm p("poor Jean");
+	b.executeForm(p);
+	b.signForm(p);
 	b.executeForm(p);
 	a.executeForm(p);
 }

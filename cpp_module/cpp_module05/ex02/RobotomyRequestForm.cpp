@@ -28,6 +28,9 @@ void RobotomyRequestForm::execute(const Bureaucrat &excutor) const {
 	if (excutor.getGrade() > this->getGradeToSign()) {
 		throw Form::GradeTooLowException();
 	}
+	if (this->getIsSigned() == 0) {
+		throw Form::UnSignedException();
+	}
 	struct timeval	time;
 	gettimeofday(&time, NULL);
 	srand(time.tv_usec);
