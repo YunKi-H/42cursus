@@ -4,6 +4,18 @@ Bureaucrat::Bureaucrat() : _name("a Bureaucrat"), _grade(Bureaucrat::_gradeLowes
 }
 
 Bureaucrat::Bureaucrat(const std::string &name, const int &grade) : _name(name), _grade(grade) {
+	try {
+		if (this->_grade < Bureaucrat::_gradeHighest) {
+			this->_grade = Bureaucrat::_gradeHighest;
+			throw Bureaucrat::GradeTooHighException();
+		}
+		if (this->_grade > Bureaucrat::_gradeHighest) {
+			this->_grade = Bureaucrat::_gradeLowest;
+			throw Bureaucrat::GradeTooLowException();
+		}
+	} catch(const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+	}
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) {
