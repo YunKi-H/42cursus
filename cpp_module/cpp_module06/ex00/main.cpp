@@ -5,7 +5,7 @@
 #include <cmath>
 #include <limits>
 
-static void printWrongValue() {
+static void printNan() {
 	std::cout << "char: " << "impossible" << std::endl;
 	std::cout << "int: " << "impossible" << std::endl;
 	std::cout << "cloat: " << "nanf" << std::endl;
@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 	? static_cast<double>(argv[1][0])
 	: strtod(argv[1], &endptr);
 	if ((endptr && *endptr != '\0' && std::string(endptr) != "f") || isnan(input)) {
-		printWrongValue();
+		printNan();
 		return 0;
 	}
 	printChar(input);
