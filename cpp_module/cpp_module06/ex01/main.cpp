@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 struct Data {
 	int i;
