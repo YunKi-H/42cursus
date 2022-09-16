@@ -32,7 +32,7 @@ void identify(Base *p) {
 	} else if (dynamic_cast<C *>(p)) {
 		std::cout << "Hmm..Maybe...C..?" << std::endl;
 	} else {
-		std::cout << "Hmm..Maybe...Nothing.." << std::endl;
+		std::cout << "Hmm..Maybe...unDerived Class.." << std::endl;
 	}
 }
 
@@ -52,7 +52,7 @@ void identify(const Base &p) {
 				std::cout << "This is Exactly C!" << std::endl;
 				return;
 			} catch(std::exception &) {
-				std::cout << "This is Exactly Nothing!" << std::endl;
+				std::cout << "This is Exactly unDerived Class!" << std::endl;
 			}
 		}
 	}
