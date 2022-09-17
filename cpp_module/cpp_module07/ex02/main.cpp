@@ -68,7 +68,7 @@ int main(int, char**)
         std::cout << copyTest[i] << " ";
     }
     std::cout << std::endl;
-    std::cout << "[0, 1, 4, 9, 16]" << std::endl;
+    std::cout << "[0, 1, 2, 3, 4]" << std::endl;
     for (int i = 0; i < 5; i++) {
         std::cout << test[i] << " ";
     }
