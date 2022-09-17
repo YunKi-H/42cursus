@@ -32,10 +32,10 @@ public:
 
 	Array &operator=(const Array &rhs) {
 		this->_size = rhs._size;
+		delete[] this->_elem;
+		this->_elem = NULL;
 		if (this->_size != 0) {
-			if (this->_elem != NULL) {
-				delete[] this->_elem;
-			}
+
 			this->_elem = new T[this->_size];
 			for (std::size_t i = 0; i < this->_size; i++) {
 				this->_elem[i] = rhs._elem[i];
