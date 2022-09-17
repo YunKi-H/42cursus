@@ -49,6 +49,10 @@ public:
 		return this->_elem[index];
 	}
 
+	std::size_t size() const {
+		return this->_size;
+	}
+
 	class OutOfRangeException : public std::exception {
 		const char *what() const throw() {
 			return "Out Of Range!";
