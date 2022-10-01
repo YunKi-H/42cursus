@@ -22,6 +22,7 @@ public:
 	explicit reverse_iterator(iterator_type it) : current(it) {}
 	template <class Iter>
 	reverse_iterator(const reverse_iterator<Iter> &rev_it) : current(rev_it.base()) {}
+	virtual ~reverse_iterator() {}
 
 	iterator_type base() const {
 		return current;
