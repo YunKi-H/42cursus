@@ -5,19 +5,21 @@
 
 namespace ft {
 
-template <class Iterator>
+template <class T>
 class random_access_iterator {
-protected:
-	Iterator current;
 
 public:
-	typedef Iterator iterator_type;
-	typedef typename ft::iterator_traits<Iterator>::iterator_category iterator_category;
-	typedef typename ft::iterator_traits<Iterator>::value_type value_type;
-	typedef typename ft::iterator_traits<Iterator>::difference_type difference_type;
-	typedef typename ft::iterator_traits<Iterator>::pointer pointer;
-	typedef typename ft::iterator_traits<Iterator>::reference reference;
+	typedef T* iterator_type;
+	typedef typename ft::iterator_traits<iterator_type>::iterator_category iterator_category;
+	typedef typename ft::iterator_traits<iterator_type>::value_type value_type;
+	typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
+	typedef typename ft::iterator_traits<iterator_type>::pointer pointer;
+	typedef typename ft::iterator_traits<iterator_type>::reference reference;
 
+protected:
+	pointer current;
+
+public:
 	random_access_iterator() : current() {}
 	explicit random_access_iterator(iterator_type it) : current(it) {}
 	template <class Iter>
