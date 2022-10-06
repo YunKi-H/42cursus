@@ -34,12 +34,16 @@ protected:
 	allocator_type _alloc;
 
 public:
-	explicit vector(const allocator_type& alloc = allocator_type()) {}
-	explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type());
+	explicit vector(const allocator_type& alloc = allocator_type())
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
+	explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
 	template <class InputIterator>
-	vector(InputIterator first, InputIterator last, const allocator_type alloc = allocator_type());
-	vector(const vector& x);
-	virtual ~vector();
+	vector(InputIterator first, InputIterator last, const allocator_type alloc = allocator_type())
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
+	vector(const vector& x)
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
+	virtual ~vector() {}
 
 	vector& operator=(const vector& x);
 	iterator begin();
@@ -52,7 +56,9 @@ public:
 	const_reverse_iterator rend() const;
 
 	size_type size() const;
-	size_type max_size() const;
+	size_type max_size() const {
+		return std::min<size_type>(std::numeric_limits<size_type>::max(), this->_alloc.max_size());
+	}
 	void resize (size_type n, value_type val = value_type());
 	size_type capacity() const;
 	bool empty() const;
