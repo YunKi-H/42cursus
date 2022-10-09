@@ -67,10 +67,17 @@ public:
 			this->_alloc.destroy(i);
 		}
 		this->_alloc.deallocate(this->_begin, this->capacity());
-		this->_begin = this->_end = this->_capacity = NULL;
+		this->_begin = NULL;
+		this->_end = NULL;
+		this->_capacity = NULL;
 	}
 
-	vector& operator=(const vector& x);
+	vector& operator=(const vector& x) {
+		if (this != &x) {
+			this->assign(x.begin(), x.end());
+		}
+		return *this;
+	}
 	iterator begin() {
 		return iterator(this->_begin);
 	}
@@ -102,14 +109,31 @@ public:
 	size_type max_size() const {
 		return std::min<size_type>(std::numeric_limits<size_type>::max(), this->_alloc.max_size());
 	}
-	void resize (size_type n, value_type val = value_type());
+	void resize (size_type n, value_type val = value_type()) {
+		if (this->size() < n) {
+			if (this->capacity() < n) {
+				this->reserve(n);
+			}
+			while (this->_end != this->_begin + n) {
+				this->_alloc.construct(this->_end, val);
+				this->_end++;
+			}
+		} else if (this->size() > n) {
+			while (this->_end != this->_begin + n) {
+				this->_alloc.destroy(this->_end);
+				this->_end--;
+			}
+		}
+	}
 	size_type capacity() const {
 		return this->_capacity - this->_begin;
 	}
 	bool empty() const {
 		return this->_begin == this->_end;
 	}
-	void reserve (size_type n);
+	void reserve (size_type n) {
+
+	}
 
 	reference operator[] (size_type n);
 	const_reference operator[] (size_type n) const;
