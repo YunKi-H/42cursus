@@ -5,9 +5,11 @@
 #include <iterator>
 
 #include <memory>
+#include <stdexcept>
 #include "random_access_iterator.hpp"
 #include "reverse_iterator.hpp"
 #include "algorithm.hpp"
+#include "type_traits.hpp"
 
 namespace ft {
 
@@ -37,31 +39,76 @@ public:
 	explicit vector(const allocator_type& alloc = allocator_type())
 	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
 	explicit vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type())
-	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {
+		if (n > this->max_size()) {
+			throw std::length_error("vector");
+		}
+		this->_begin = this->_alloc.allocate(n);
+		this->_end = this->_begin + n;
+		this->_capacity = this->_end;
+		for (pointer i = this->_begin; i < end; i++) {
+			this->_alloc.construct(i, val);
+		}
+	}
 	template <class InputIterator>
-	vector(InputIterator first, InputIterator last, const allocator_type alloc = allocator_type())
-	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
+	vector(InputIterator first, InputIterator last, const allocator_type alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0)
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {
+		this->assign(first, last);
+	}
 	vector(const vector& x)
-	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(alloc) {}
-	virtual ~vector() {}
+	: _begin(NULL), _end(NULL), _capacity(NULL), _alloc(x._alloc) {
+		*this = x;
+	}
+	virtual ~vector() {
+		if (this->_begin == NULL) {
+			return;
+		}
+		for (pointer i = this->_begin; i < this->_end; i++) {
+			this->_alloc.destroy(i);
+		}
+		this->_alloc.deallocate(this->_begin, this->capacity());
+		this->_begin = this->_end = this->_capacity = NULL;
+	}
 
 	vector& operator=(const vector& x);
-	iterator begin();
-	const_iterator begin() const;
-	iterator end();
-	const_iterator end() const;
-	reverse_iterator rbegin();
-	const_reverse_iterator rbegin() const;
-	reverse_iterator rend();
-	const_reverse_iterator rend() const;
+	iterator begin() {
+		return iterator(this->_begin);
+	}
+	const_iterator begin() const {
+		return const_iterator(this->_begin);
+	}
+	iterator end() {
+		return iterator(this->_end);
+	}
+	const_iterator end() const {
+		return const_iterator(this->_end);
+	}
+	reverse_iterator rbegin() {
+		return reverse_iterator(this->end());
+	}
+	const_reverse_iterator rbegin() const {
+		return const_reverse_iterator(this->end());
+	}
+	reverse_iterator rend() {
+		return reverse_iterator(this->begin());
+	}
+	const_reverse_iterator rend() const {
+		return const_reverse_iterator(this->begin());
+	}
 
-	size_type size() const;
+	size_type size() const {
+		return this->_end - this->_begin;
+	}
 	size_type max_size() const {
 		return std::min<size_type>(std::numeric_limits<size_type>::max(), this->_alloc.max_size());
 	}
 	void resize (size_type n, value_type val = value_type());
-	size_type capacity() const;
-	bool empty() const;
+	size_type capacity() const {
+		return this->_capacity - this->_begin;
+	}
+	bool empty() const {
+		return this->_begin == this->_end;
+	}
 	void reserve (size_type n);
 
 	reference operator[] (size_type n);
