@@ -132,33 +132,63 @@ public:
 		return this->_begin == this->_end;
 	}
 	void reserve (size_type n) {
-
+		if (this->capacity() >= n) {
+			return;
+		}
+		ft::vector _v(n);
+		this->swap(_v);
 	}
 
-	reference operator[] (size_type n);
-	const_reference operator[] (size_type n) const;
-	reference at (size_type n);
-	const_reference at (size_type n) const;
-	reference front();
-	const_reference front() const;
-	reference back();
-	const_reference back() const;
+	reference operator[] (size_type n) {
+		return this->_begin[n];
+	}
+	const_reference operator[] (size_type n) const {
+		return this->_begin[n];
+	}
+	reference at (size_type n) {
+		if (n > this->size()) {
+			throw std::out_of_range("vector");
+		}
+		return this->_begin[n];
+	}
+	const_reference at (size_type n) const {
+		if (n > this->size()) {
+			throw std::out_of_range("vector");
+		}
+		return this->_begin[n];
+	}
+	reference front() {
+		return this->_begin[0];
+	}
+	const_reference front() const {
+		return this->_begin[0];
+	}
+	reference back() {
+		return *(this->_end - 1);
+	}
+	const_reference back() const {
+		return *(this->_end - 1);
+	}
 
 	template <class InputIterator>
-	void assign (InputIterator first, InputIterator last);
+	void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+
+	}
 	void assign (size_type n, const value_type& val);
 	void push_back (const value_type& val);
 	void pop_back();
 	iterator insert (iterator position, const value_type& val);
 	void insert (iterator position, size_type n, const value_type& val);
 	template <class InputIterator>
-	void insert (iterator position, InputIterator first, InputIterator last);
+	void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0);
 	iterator erase (iterator position);
 	iterator erase (iterator first, iterator last);
 	void swap (vector& x);
 	void clear();
 
-	allocator_type get_allocator() const;
+	allocator_type get_allocator() const {
+		return this->_alloc;
+	}
 
 };
 
