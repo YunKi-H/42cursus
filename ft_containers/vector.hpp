@@ -188,17 +188,36 @@ public:
 			this->reserve(dist);
 		}
 		std::uninitialized_copy(first, last, this->_begin);
+		this->_end = this->_begin + dist;
 	}
-	void assign (size_type n, const value_type& val);
-	void push_back (const value_type& val);
-	void pop_back();
+	void assign (size_type n, const value_type& val) {
+		this->clear();
+		if (this->capacity() < n) {
+			this->reserve(n);
+		}
+		std::uninitialized_fill_n(this->_begin, n, val);
+		this->_end = this->_begin + n;
+	}
+	void push_back (const value_type& val) {
+		if (this->capacity() < this->size() + 1) {
+			this->reserve(this->size() + 1);
+		}
+		this->_alloc.construct(this->_end, val);
+		this->_end++;
+	}
+	void pop_back() {
+		this->_end--;
+		this->_alloc.destroy(this->_end);
+	}
 	iterator insert (iterator position, const value_type& val);
 	void insert (iterator position, size_type n, const value_type& val);
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0);
 	iterator erase (iterator position);
 	iterator erase (iterator first, iterator last);
-	void swap (vector& x);
+	void swap (vector& x) {
+		(void)x;
+	}
 	void clear();
 
 	allocator_type get_allocator() const {
