@@ -1,5 +1,5 @@
 #ifndef VECTOR_HPP
-#define VERTOP_HPP
+#define VECTOR_HPP
 
 // #include <vector>
 #include <iterator>
@@ -46,7 +46,7 @@ public:
 		this->_begin = this->_alloc.allocate(n);
 		this->_end = this->_begin + n;
 		this->_capacity = this->_end;
-		for (pointer i = this->_begin; i < end; i++) {
+		for (pointer i = this->_begin; i < this->_end; i++) {
 			this->_alloc.construct(i, val);
 		}
 	}
@@ -135,8 +135,18 @@ public:
 		if (this->capacity() >= n) {
 			return;
 		}
-		ft::vector _v(n);
-		this->swap(_v);
+		n = this->capacity() * 2 < n ? this->capacity() * 2 : n;
+		size_type oldSize = this->size();
+		pointer newBegin = this->_alloc.allocate(n);
+		std::uninitialized_copy(this->_begin, this->_end, newBegin);
+		while (this->_end != this->_begin) {
+			this->_alloc.destroy(this->_end);
+			this->_end--;
+		}
+		this->_alloc.deallocate(this->_begin);
+		this->_begin = newBegin;
+		this->_end = this->_begin + oldSize;
+		this->_capacity = this->_begin + n;
 	}
 
 	reference operator[] (size_type n) {
@@ -172,7 +182,12 @@ public:
 
 	template <class InputIterator>
 	void assign (InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
-
+		size_type dist = std::distance(first, last);
+		this->clear();
+		if (this->capacity() < dist) {
+			this->reserve(dist);
+		}
+		std::uninitialized_copy(first, last, this->_begin);
 	}
 	void assign (size_type n, const value_type& val);
 	void push_back (const value_type& val);

@@ -95,7 +95,7 @@ bool operator>(const random_access_iterator<Iterator>& lhs, const random_access_
 }
 template <class Iterator>
 bool operator>=(const random_access_iterator<Iterator>& lhs, const random_access_iterator<Iterator>& rhs) {
-	return lhs.base() >= rhs.base()
+	return lhs.base() >= rhs.base();
 }
 
 template <class Iterator>
