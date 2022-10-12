@@ -135,7 +135,7 @@ public:
 		if (this->capacity() >= n) {
 			return;
 		}
-		n = this->capacity() * 2 < n ? this->capacity() * 2 : n;
+		n = this->capacity() * 2 > n ? this->capacity() * 2 : n;
 		size_type oldSize = this->size();
 		pointer newBegin = this->_alloc.allocate(n);
 		std::uninitialized_copy(this->_begin, this->_end, newBegin);
@@ -210,8 +210,8 @@ public:
 		this->_alloc.destroy(this->_end);
 	}
 	iterator insert (iterator position, const value_type& val) {
-		iterator tmp = position;
-		if (this->capacity() < this->size() + 1) {
+		pointer p = this->_begin + (position - this->begin());
+		if (this->size() < this->capacity()) {
 
 		}
 		(void)val;
