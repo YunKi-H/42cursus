@@ -210,17 +210,29 @@ public:
 		this->_alloc.destroy(this->_end);
 	}
 	iterator insert (iterator position, const value_type& val) {
-		pointer p = this->_begin + (position - this->begin());
-		if (this->size() < this->capacity()) {
-
+		difference_type diff = position - this->begin();
+		if (this->capacity() < this->size() + 1) {
+			this->reserve(this->size() + 1);
 		}
-		(void)val;
-		return tmp;
+		pointer p = this->_begin + diff;
+		this->_alloc.construct(this->_end, NULL);
+		this->_end++;
+		for (pointer tmp = this->_end; tmp > p; --tmp) {
+			*tmp = *(tmp - 1);
+		}
+		*p = val;
+		return iterator(p);
 	}
 	void insert (iterator position, size_type n, const value_type& val) {
-		(void)position;
-		(void)n;
-		(void)val;
+		difference_type diff = position - this->begin();
+		this->resize(this->size() + n);
+		pointer p = this->_begin + diff;
+		for (pointer tmp = this->_end; tmp > p + n; --tmp) {
+			*tmp = *(tmp - 1);
+		}
+		while (n--) {
+			*p++ = val;
+		}
 	}
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
