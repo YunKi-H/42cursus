@@ -41,7 +41,7 @@ public:
 		return *this;
 	}
 	random_access_iterator operator++(int) {
-		random_access_iterator temp = *this;
+		random_access_iterator temp(*this);
 		++(*this);
 		return temp;
 	}
@@ -57,7 +57,7 @@ public:
 		return *this;
 	}
 	random_access_iterator operator--(int) {
-		random_access_iterator temp = *this;
+		random_access_iterator temp(*this);
 		--(*this);
 		return temp;
 	}

@@ -40,7 +40,7 @@ public:
 		return *this;
 	}
 	reverse_iterator operator++(int) {
-		reverse_iterator temp = *this;
+		reverse_iterator temp(*this);
 		++(*this);
 		return temp;
 	}
@@ -56,7 +56,7 @@ public:
 		return *this;
 	}
 	reverse_iterator operator--(int) {
-		reverse_iterator temp = *this;
+		reverse_iterator temp(*this);
 		--(*this);
 		return temp;
 	}

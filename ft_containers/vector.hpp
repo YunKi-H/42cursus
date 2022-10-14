@@ -60,16 +60,17 @@ public:
 		*this = x;
 	}
 	virtual ~vector() {
-		if (this->_begin == NULL) {
-			return;
+		if (this->_begin) {
+			// for (pointer i = this->_begin; i < this->_end; i++) {
+			// 	this->_alloc.destroy(i);
+			// }
+			size_type n = this->capacity();
+			this->clear();
+			this->_alloc.deallocate(this->_begin, n);
+			this->_begin = NULL;
+			this->_end = NULL;
+			this->_capacity = NULL;
 		}
-		for (pointer i = this->_begin; i < this->_end; i++) {
-			this->_alloc.destroy(i);
-		}
-		this->_alloc.deallocate(this->_begin, this->capacity());
-		this->_begin = NULL;
-		this->_end = NULL;
-		this->_capacity = NULL;
 	}
 
 	vector& operator=(const vector& x) {
@@ -114,14 +115,14 @@ public:
 			if (this->capacity() < n) {
 				this->reserve(n);
 			}
-			while (this->_end != this->_begin + n) {
+			while (this->size() != n) {
 				this->_alloc.construct(this->_end, val);
 				this->_end++;
 			}
 		} else if (this->size() > n) {
-			while (this->_end != this->_begin + n) {
-				this->_alloc.destroy(this->_end);
+			while (this->size() != n) {
 				this->_end--;
+				this->_alloc.destroy(this->_end);
 			}
 		}
 	}
@@ -135,14 +136,11 @@ public:
 		if (this->capacity() >= n) {
 			return;
 		}
-		n = this->capacity() * 2 > n ? this->capacity() * 2 : n;
+		n = n > this->capacity() * 2 ? n : this->capacity() * 2;
 		size_type oldSize = this->size();
 		pointer newBegin = this->_alloc.allocate(n);
 		std::uninitialized_copy(this->_begin, this->_end, newBegin);
-		while (this->_end != this->_begin) {
-			this->_alloc.destroy(this->_end);
-			this->_end--;
-		}
+		this->clear();
 		this->_alloc.deallocate(this->_begin, this->capacity());
 		this->_begin = newBegin;
 		this->_end = this->_begin + oldSize;
@@ -215,43 +213,75 @@ public:
 			this->reserve(this->size() + 1);
 		}
 		pointer p = this->_begin + diff;
-		this->_alloc.construct(this->_end, NULL);
+		this->_alloc.construct(this->_end, val);
 		this->_end++;
-		for (pointer tmp = this->_end; tmp > p; --tmp) {
-			*tmp = *(tmp - 1);
-		}
+		std::copy_backward(p, this->_end - 1, this->_end);
 		*p = val;
 		return iterator(p);
 	}
 	void insert (iterator position, size_type n, const value_type& val) {
 		difference_type diff = position - this->begin();
-		this->resize(this->size() + n);
+		this->resize(this->size() + n, 0);
 		pointer p = this->_begin + diff;
-		for (pointer tmp = this->_end; tmp > p + n; --tmp) {
-			*tmp = *(tmp - 1);
-		}
+		std::copy_backward(p, this->_end - n, this->_end);
 		while (n--) {
 			*p++ = val;
 		}
 	}
 	template <class InputIterator>
 	void insert (iterator position, InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
-		(void)position;
-		(void)first;
-		(void)last;
+		difference_type diff = position - this->begin();
+		difference_type n = std::distance(first, last);
+		this->resize(this->size() + n);
+		pointer p = this->_begin + diff;
+		std::copy_backward(p, this->_end - n, this->_end);
+		for (InputIterator tmp = first; tmp != last; ++tmp) {
+			*p++ = *tmp;
+		}
 	}
 	iterator erase (iterator position) {
+		if (this->empty()) {
+			return position;
+		}
+		// for (pointer p = position.base(); p < this->_end - 1; p++) {
+		// 	*p = *(p + 1);
+		// }
+		std::copy(position + 1, this->end(), position);
+		this->_end--;
+		this->_alloc.destroy(this->_end);
 		return position;
 	}
 	iterator erase (iterator first, iterator last) {
-		(void)first;
-		return last;
+		difference_type diff = std::distance(first, last);
+		// pointer tmp = first.base();
+		// while (last != this->end()) {
+		// 	*tmp = *last;
+		// 	++tmp;
+		// 	++last;
+		// }
+		std::copy(last, this->end(), first);
+		while (diff--) {
+			this->_end--;
+			this->_alloc.destroy(this->_end);
+		}
+		return first;
 	}
 	void swap (vector& x) {
-		(void)x;
+		pointer tmpBegin = this->_begin;
+		pointer tmpEnd = this->_end;
+		pointer tmpCapacity = this->_capacity;
+		this->_begin = x._begin;
+		this->_end = x._end;
+		this->_capacity = x._capacity;
+		x._begin = tmpBegin;
+		x._end = tmpEnd;
+		x._capacity = tmpCapacity;
 	}
 	void clear() {
-
+		while (this->_end != this->_begin) {
+			this->_end--;
+			this->_alloc.destroy(this->_end);
+		}
 	}
 
 	allocator_type get_allocator() const {
@@ -262,7 +292,7 @@ public:
 
 template <class T, class Alloc>
 bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-	return equal(lhs.begin(), lhs.end(), rhs.begin());
+	return lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 }
 template <class T, class Alloc>
 bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
@@ -270,11 +300,11 @@ bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 }
 template <class T, class Alloc>
 bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-	return lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 template <class T, class Alloc>
 bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-	return rhs < lhs;
+	return !(rhs < lhs);
 }
 template <class T, class Alloc>
 bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
@@ -282,12 +312,11 @@ bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
 }
 template <class T, class Alloc>
 bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs) {
-	return lhs < rhs;
+	return !(lhs < rhs);
 }
 template <class T, class Alloc>
 void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
-	(void)x;
-	(void)y;
+	x.swap(y);
 }
 
 
