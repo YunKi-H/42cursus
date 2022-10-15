@@ -61,9 +61,6 @@ public:
 	}
 	virtual ~vector() {
 		if (this->_begin) {
-			// for (pointer i = this->_begin; i < this->_end; i++) {
-			// 	this->_alloc.destroy(i);
-			// }
 			size_type n = this->capacity();
 			this->clear();
 			this->_alloc.deallocate(this->_begin, n);
@@ -243,9 +240,6 @@ public:
 		if (this->empty()) {
 			return position;
 		}
-		// for (pointer p = position.base(); p < this->_end - 1; p++) {
-		// 	*p = *(p + 1);
-		// }
 		std::copy(position + 1, this->end(), position);
 		this->_end--;
 		this->_alloc.destroy(this->_end);
@@ -253,12 +247,6 @@ public:
 	}
 	iterator erase (iterator first, iterator last) {
 		difference_type diff = std::distance(first, last);
-		// pointer tmp = first.base();
-		// while (last != this->end()) {
-		// 	*tmp = *last;
-		// 	++tmp;
-		// 	++last;
-		// }
 		std::copy(last, this->end(), first);
 		while (diff--) {
 			this->_end--;
@@ -318,7 +306,6 @@ template <class T, class Alloc>
 void swap (vector<T,Alloc>& x, vector<T,Alloc>& y) {
 	x.swap(y);
 }
-
 
 } // namespace ft
 
