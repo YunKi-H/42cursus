@@ -9,7 +9,7 @@ template <class T>
 class random_access_iterator {
 
 public:
-	typedef T* iterator_type;
+	typedef T iterator_type;
 	typedef typename ft::iterator_traits<iterator_type>::iterator_category iterator_category;
 	typedef typename ft::iterator_traits<iterator_type>::value_type value_type;
 	typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
