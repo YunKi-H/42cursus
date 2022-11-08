@@ -328,7 +328,24 @@ public:
 		(void)last;
 	}
 	void swap (map& x) {
-		(void)x;
+		_node_pointer tmpBegin = this->_begin;
+		_node_pointer tmpEnd = this->_end;
+		_node_allocator tmpAlloc = this->_alloc;
+		key_compare tmpKeyCompare = this->_key_compare;
+		value_compare tmpValueCompare = this->_value_compare;
+		size_type tmpSize = this->_size;
+		this->_begin = x._begin;
+		this->_end = x._end;
+		this->_alloc = x._alloc;
+		this->_key_compare = x._key_compare;
+		this->_value_compare = x._value_compare;
+		this->_size = x._size;
+		x._begin = tmpBegin;
+		x.end = tmpEnd;
+		x._alloc = tmpAlloc;
+		x._key_compare = tmpKeyCompare;
+		x._value_compare = tmpValueCompare;
+		x._size = tmpSize;
 	}
 	void clear() {
 
