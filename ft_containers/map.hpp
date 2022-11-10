@@ -49,25 +49,12 @@ struct _mapNode {
 		}
 		return x;
 	}
-	// static const _nodePtr _minimum(const _nodePtr x) {
-	// 	while (x->_left != NULL) {
-	// 		x = x->_left;
-	// 	}
-	// 	return x;
-	// }
-
 	static _nodePtr _maximum(_nodePtr x) {
 		while (x->_right != NULL) {
 			x = x->_right;
 		}
 		return x;
 	}
-	// static const _nodePtr _maximum(const _nodePtr x) {
-	// 	while (x->_right != NULL) {
-	// 		x = x->_right;
-	// 	}
-	// 	return x;
-	// }
 
 	static _nodePtr _nextNode(_nodePtr x) {
 		if (x->_right != NULL) {
@@ -83,7 +70,6 @@ struct _mapNode {
 		}
 		return x;
 	}
-
 	static _nodePtr _prevNode(_nodePtr x) {
 		if (x->_left != NULL) {
 			x = x->_left;
@@ -263,6 +249,10 @@ protected:
 		y->_right = node;
 	}
 
+	bool _searchPosition(_node_pointer newNode) {
+
+	}
+
 public:
 	explicit map (
 		const key_compare& comp = key_compare(),
@@ -416,28 +406,89 @@ public:
 	}
 
 	iterator find (const key_type& k) {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		while (node != NULL) {
+			if (_value_compare(k, node->_value)) {
+				node = node->_left;
+			} else if (_value_compare(k, node->_value)) {
+				node = node->_right;
+			} else {
+				return iterator(node);
+			}
+		}
+		return iterator(this->_end);
 	}
 	const_iterator find (const key_type& k) const {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		while (node != NULL) {
+			if (_value_compare(k, node->_value)) {
+				node = node->_left;
+			} else if (_value_compare(k, node->_value)) {
+				node = node->_right;
+			} else {
+				return const_iterator(node);
+			}
+		}
+		return const_iterator(this->_end);
 	}
 	size_type count (const key_type& k) const {
 		(void)k;
 	}
 	iterator lower_bound (const key_type& k) {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			if (!_value_compare(node->_value, k)) {
+				tmp = node;
+				node = node->_left;
+			} else {
+				node = node->_right;
+			}
+		}
+		return iterator(tmp);
 	}
 	const_iterator lower_bound (const key_type& k) const {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			if (!_value_compare(node->_value, k)) {
+				tmp = node;
+				node = node->_left;
+			} else {
+				node = node->_right;
+			}
+		}
+		return const_iterator(tmp);
 	}
 	iterator upper_bound (const key_type& k) {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			if (_value_compare(k, node->_value)) {
+				tmp = node;
+				node = node->_left;
+			} else {
+				node = node->_right;
+			}
+		}
+		return iterator(tmp);
 	}
 	const_iterator upper_bound (const key_type& k) const {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			if (_value_compare(k, node->_value)) {
+				tmp = node;
+				node = node->_left;
+			} else {
+				node = node->_right;
+			}
+		}
+		return const_iterator(tmp);
 	}
 	ft::pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
 	}
 	ft::pair<iterator,iterator> equal_range (const key_type& k) {
 		(void)k;
