@@ -209,6 +209,60 @@ protected:
 		this->_alloc.deallocate(node, 1);
 	}
 
+	bool _isRoot(_node_pointer node) {
+		return node->_parent == this->_end;
+	}
+
+	void _reColoring(_node_pointer node) {
+
+	}
+	void _reStructuring(_node_pointer node) {
+
+	}
+
+	void _rotateRight(_node_pointer node) {
+		_node_pointer y = node->_right;
+		if (y->_left != NULL) {
+			y->_left->_parent = node;
+			node->_right = y->_left;
+			y->_left = NULL;
+		}
+		if (this->_isRoot(node)) {
+			this->_end->_left = y;
+			y->_parent = this->_end;
+			node->_parent = NULL
+		} else if (node->_parent->_left == node) {
+			node->_parent->_left = y;
+			y->_parent = node->_parent;
+		} else {
+			node->_parent->_right = y;
+			y->_parent = node->_parent;
+		}
+		node->_parent = y;
+		y->_left = node;
+	}
+	void _rotateLeft(_node_pointer node) {
+		_node_pointer y = node->_left;
+		if (y->_right != NULL) {
+			y->_right->_parent = node;
+			node->_left = y->_right;
+			y->_right = NULL;
+		}
+		if (this->_isRoot(node)) {
+			this->_end->_right = y;
+			y->_parent = this->_end;
+			node->_parent = NULL
+		} else if (node->_parent->_right == node) {
+			node->_parent->_right = y;
+			y->_parent = node->_parent;
+		} else {
+			node->_parent->_left = y;
+			y->_parent = node->_parent;
+		}
+		node->_parent = y;
+		y->_right = node;
+	}
+
 public:
 	explicit map (
 		const key_compare& comp = key_compare(),
@@ -348,7 +402,10 @@ public:
 		x._size = tmpSize;
 	}
 	void clear() {
-
+		this->_destructTree(this->_end->_left);
+		this->_end->_left = NULL;
+		this->_size = 0;
+		this->_begin = this->_end;
 	}
 
 	key_compare key_comp() const {
