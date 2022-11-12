@@ -249,8 +249,20 @@ protected:
 		y->_right = node;
 	}
 
-	bool _searchPosition(_node_pointer newNode) {
-
+	_node_pointer _searchPosition(const value_type& value) {
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			tmp = node;
+			if (_value_compare(value, node->_value)) {
+				node = node->_left;
+			} else if (_value_compare(node->_value, value)) {
+				node = node->_right;
+			} else {
+				return node;
+			}
+		}
+		return tmp;
 	}
 
 public:
@@ -342,7 +354,8 @@ public:
 	}
 
 	mapped_type& operator[] (const key_type& k) {
-		(void)k;
+		ft::pair<iterator, bool> tmp = this->insert(ft::make_pair(k, mapped_type()));
+		return *(tmp.first).second;
 	}
 
 	ft::pair<iterator,bool> insert (const value_type& val) {
@@ -432,7 +445,8 @@ public:
 		return const_iterator(this->_end);
 	}
 	size_type count (const key_type& k) const {
-		(void)k;
+		ft::pair<const_iterator, const_iterator> p = this->equal_range(k);
+		return size_type(std::distance(p.first, p.second));
 	}
 	iterator lower_bound (const key_type& k) {
 		_node_pointer node = this->_end->_left;
@@ -489,9 +503,38 @@ public:
 	ft::pair<const_iterator,const_iterator> equal_range (const key_type& k) const {
 		_node_pointer node = this->_end->_left;
 		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			if (_value_compare(k, node->_value)) {
+				tmp = node;
+				node = node->_left;
+			} else if (_value_compare(node->_value, k)) {
+				node = node->_right;
+			} else {
+				if (node->_right != NULL) {
+					tmp = _mapNode<value_type>::_minimum(node->_right);
+				}
+				return ft::pair<const_iterator, const_iterator>(const_iterator(node), const_iterator(tmp));
+			}
+		}
+		return ft::pair<const_iterator, const_iterator>(const_iterator(tmp), const_iterator(tmp));
 	}
 	ft::pair<iterator,iterator> equal_range (const key_type& k) {
-		(void)k;
+		_node_pointer node = this->_end->_left;
+		_node_pointer tmp = this->_end;
+		while (node != NULL) {
+			if (_value_compare(k, node->_value)) {
+				tmp = node;
+				node = node->_left;
+			} else if (_value_compare(node->_value, k)) {
+				node = node->_right;
+			} else {
+				if (node->_right != NULL) {
+					tmp = _mapNode<value_type>::_minimum(node->_right);
+				}
+				return ft::pair<iterator, iterator>(iterator(node), iterator(tmp));
+			}
+		}
+		return ft::pair<iterator, iterator>(iterator(tmp), iterator(tmp));
 	}
 
 	allocator_type get_allocator() const {
