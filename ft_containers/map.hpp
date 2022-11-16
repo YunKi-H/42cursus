@@ -199,13 +199,6 @@ protected:
 		return node->_parent == this->_end;
 	}
 
-	void _reColoring(_node_pointer node) {
-
-	}
-	void _reStructuring(_node_pointer node) {
-
-	}
-
 	void _rotateRight(_node_pointer node) {
 		_node_pointer y = node->_right;
 		if (y->_left != NULL) {
@@ -249,6 +242,7 @@ protected:
 		y->_right = node;
 	}
 
+	// 새로 삽입될 노드의 부모가 될 value와 가장 가까운 노드를 반환
 	_node_pointer _searchPosition(const value_type& value) {
 		_node_pointer node = this->_end->_left;
 		_node_pointer tmp = this->_end;
@@ -359,30 +353,97 @@ public:
 	}
 
 	ft::pair<iterator,bool> insert (const value_type& val) {
-		(void)val;
+		_node_pointer parent = this->_searchPosition(val);
+		_node_pointer node;
+		if (parent == this->_end) {
+			node = this->_alloc.allocate(1);
+			this->_alloc.construct(node, val);
+			this->_end->_left = node;
+			node->_parent = this->_end;
+		} else if (_value_compare(val, parent->_value)) {
+			node = this->_alloc.allocate(1);
+			this->_alloc.construct(node, val);
+			node->_parent = parent;
+			parent->_left = node;
+		} else if (_value_compare(parent->_value, val)) {
+			node = this->_alloc.allocate(1);
+			this->_alloc.construct(node, val);
+			node->_parent = parent;
+			parent->_right = node;
+		} else {
+			return ft::make_pair(iterator(parent), false);
+		}
+
+		// insertFix algorithm
+		_node_pointer grandParent;
+		while (node->_parent->_color == RED) {
+			if (node->_parent == node->_parent->_parent->_left) {
+				grandParent = node->_parent->_parent;
+				if (grandParent->_right->_color == RED) {
+					grandParent->_left->_color = BLACK;
+					grandParent->_right->_color = BLACK;
+					grandParent->_color = RED;
+					node = grandParent;
+				} else {
+					if (node == node->_parent->_right) {
+						node = node->_parent;
+						_rotateRight(node);
+					}
+					node->_parent->_color = BLACK;
+					grandParent->_color = RED;
+					_rotateRight(grandParent);
+				}
+			} else {
+				grandParent = node->_parent->_parent;
+				if (grandParent->_left->_color == RED) {
+					grandParent->_right->_color = BLACK;
+					grandParent->_left->_color = BLACK;
+					grandParent->_color = RED;
+					node = grandParent;
+				} else {
+					if (node == node->_parent->_left) {
+						node = node->_parent;
+						_rotateRight(node);
+					}
+					node->_parent->_color = BLACK;
+					grandParent->_color = RED;
+					_rotateRight(grandParent);
+				}
+			}
+			this->_end->_left->_color = BLACK;
+		}
+		this->_size += 1;
+		return ft::make_pair(iterator(node), true);
 	}
 	iterator insert (iterator position, const value_type& val) {
-		(void)position;
-		(void)val;
+		ft::pair<iterator, bool> tmp = this->insert(val);
+		return tmp.first;
 	}
 	template <class InputIterator>
 	void insert (
 		InputIterator first,
 		InputIterator last,
 		typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
-			(void)first;
-			(void)last;
+			while (first != last) {
+				this->insert(*first);
+				first++;
+			}
 	}
 
 	void erase (iterator position) {
 		(void)position;
+		this->_size -= 1;
 	}
 	size_type erase (const key_type& k) {
 		(void)k;
+		this->_size -= 1;
+		return 1;
 	}
 	void erase (iterator first, iterator last) {
-		(void)first;
-		(void)last;
+		while (first != last) {
+			this->erase(*first);
+			first++;
+		}
 	}
 	void swap (map& x) {
 		_node_pointer tmpBegin = this->_begin;
@@ -405,7 +466,7 @@ public:
 		x._size = tmpSize;
 	}
 	void clear() {
-		this->_destructTree(this->_end->_left);
+		this->_destructTree(this->_end->_right);
 		this->_end->_left = NULL;
 		this->_size = 0;
 		this->_begin = this->_end;
