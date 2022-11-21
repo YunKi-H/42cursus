@@ -1,6 +1,8 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 
+// https://www.programiz.com/dsa/red-black-tree
+#include <iostream>
 // #include <map>
 #include <iterator>
 
@@ -59,7 +61,7 @@ struct _mapNode {
 	static _nodePtr _nextNode(_nodePtr x) {
 		if (x->_right != NULL) {
 			x = x->_right;
-			x = x->_minimum();
+			x = _minimum(x);
 		} else {
 			_nodePtr y = x->_parent;
 			while (x == y->_right) {
@@ -73,7 +75,7 @@ struct _mapNode {
 	static _nodePtr _prevNode(_nodePtr x) {
 		if (x->_left != NULL) {
 			x = x->_left;
-			x = x->_maximum;
+			x = _maximum(x);
 		} else {
 			_nodePtr y = x->_parent;
 			while (x == y->_left) {
@@ -89,19 +91,22 @@ struct _mapNode {
 template <class T>
 class map_iterator {
 public:
-	typedef T iterator_type;
+	typedef T value_type;
+	typedef value_type* pointer;
+	typedef value_type& reference;
+	typedef ft::_mapNode<value_type>* iterator_type;
 	typedef typename std::bidirectional_iterator_tag iterator_category;
-	typedef typename ft::iterator_traits<ft::_mapNode<iterator_type> *>::value_type value_type;
-	typedef typename ft::iterator_traits<ft::_mapNode<iterator_type> *>::difference_type difference_type;
-	typedef typename ft::iterator_traits<ft::_mapNode<iterator_type> *>::pointer pointer;
-	typedef typename ft::iterator_traits<ft::_mapNode<iterator_type> *>::reference reference;
+	typedef typename ft::iterator_traits<iterator_type>::value_type node_type;
+	typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
+	typedef typename ft::iterator_traits<iterator_type>::pointer node_pointer;
+	typedef typename ft::iterator_traits<iterator_type>::reference node_reference;
 
 protected:
-	pointer _node;
+	node_pointer _node;
 
 public:
 	map_iterator() : _node() {}
-	explicit map_iterator(iterator_type it) : _node(it) {}
+	explicit map_iterator(node_pointer it) : _node(it) {}
 	template <class Iter>
 	map_iterator(const map_iterator<Iter> & it) : _node(it._node) {}
 	virtual ~map_iterator() {}
@@ -113,13 +118,15 @@ public:
 		return lhs._node != rhs._node;
 	}
 	reference operator*() const {
-		return *(&static_cast<_mapNode<T> >(_node)._value);
+		// return *(&static_cast<_mapNode<T> >(_node)._value);
+		return _node->_value;
 	}
 	pointer operator->() const {
-		return &static_cast<_mapNode<T> >(_node)._value;
+		// return &static_cast<_mapNode<T> >(_node)._value;
+		return &_node->_value;
 	}
 	map_iterator& operator++() {
-		this->_node = this->_node._nextNode();
+		this->_node = this->_node->_nextNode(this->_node);
 		return *this;
 	}
 	map_iterator operator++(int) {
@@ -128,13 +135,17 @@ public:
 		return temp;
 	}
 	map_iterator& operator--() {
-		this->_node = this->_node._prevNode();
+		this->_node = this->_node->_prevNode(this->_node);
 		return *this;
 	}
 	map_iterator operator--(int) {
 		map_iterator temp(*this);
 		--(*this);
 		return temp;
+	}
+
+	node_pointer base() const {
+		return this->_node;
 	}
 };
 
@@ -154,13 +165,14 @@ public:
 	typedef typename allocator_type::difference_type difference_type;
 
 	typedef ft::map_iterator<value_type> iterator;
-	typedef ft::map_iterator<const value_type> const_iterator;
+	typedef ft::map_iterator<value_type> const_iterator;
 	typedef ft::reverse_iterator<iterator> reverse_iterator;
 	typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 	class value_compare
 	: public std::binary_function<value_type,value_type,bool> {
 		friend class map<Key, T, Compare, Allocator>;
+		// friend class map;
 	protected:
 		Compare comp;
 		value_compare (Compare c) : comp(c) {}
@@ -168,8 +180,14 @@ public:
 		typedef bool result_type;
 		typedef value_type first_argument_type;
 		typedef value_type second_argument_type;
-		bool operator() (const value_type& x, const value_type& y) const{
+		bool operator() (const value_type& x, const value_type& y) const {
 			return comp(x.first, y.first);
+		}
+		bool operator()(const value_type& x, const key_type& y) const {
+			return comp(x.first, y);
+		}
+		bool operator()(const key_type& x, const value_type& y) const {
+			return comp(x, y.first);
 		}
 	};
 
@@ -180,6 +198,7 @@ protected:
 
 	_node_pointer _begin;
 	_node_pointer _end;
+	_node_pointer _nil;
 	_node_allocator _alloc;
 	key_compare _key_compare;
 	value_compare _value_compare;
@@ -209,7 +228,7 @@ protected:
 		if (this->_isRoot(node)) {
 			this->_end->_left = y;
 			y->_parent = this->_end;
-			node->_parent = NULL
+			node->_parent = NULL;
 		} else if (node->_parent->_left == node) {
 			node->_parent->_left = y;
 			y->_parent = node->_parent;
@@ -230,7 +249,7 @@ protected:
 		if (this->_isRoot(node)) {
 			this->_end->_right = y;
 			y->_parent = this->_end;
-			node->_parent = NULL
+			node->_parent = NULL;
 		} else if (node->_parent->_right == node) {
 			node->_parent->_right = y;
 			y->_parent = node->_parent;
@@ -349,7 +368,7 @@ public:
 
 	mapped_type& operator[] (const key_type& k) {
 		ft::pair<iterator, bool> tmp = this->insert(ft::make_pair(k, mapped_type()));
-		return *(tmp.first).second;
+		return (*tmp.first).second;
 	}
 
 	ft::pair<iterator,bool> insert (const value_type& val) {
@@ -416,14 +435,14 @@ public:
 		return ft::make_pair(iterator(node), true);
 	}
 	iterator insert (iterator position, const value_type& val) {
+		(void)position;
 		ft::pair<iterator, bool> tmp = this->insert(val);
 		return tmp.first;
 	}
 	template <class InputIterator>
 	void insert (
 		InputIterator first,
-		InputIterator last,
-		typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type * = 0) {
+		InputIterator last) {
 			while (first != last) {
 				this->insert(*first);
 				first++;
@@ -431,15 +450,126 @@ public:
 	}
 
 	void erase (iterator position) {
-		(void)position;
+		if (position == this->begin()) {
+			this->_begin = this->_begin->_nextNode();
+		}
+
+		_node_pointer nodeToBeDeleted = position.base();
+		bool originalColor = nodeToBeDeleted->_color;
+
+		_node_pointer x;
+		_node_pointer y;
+		if (nodeToBeDeleted->_left == NULL) {
+			x = nodeToBeDeleted->_right;
+			if (nodeToBeDeleted->_parent->_left == nodeToBeDeleted) {
+				nodeToBeDeleted->_parent->_left = x;
+			} else {
+				nodeToBeDeleted->_parent->_right = x;
+			}
+			x->_parent = nodeToBeDeleted->_parent;
+		} else if (nodeToBeDeleted->_right == NULL) {
+			x = nodeToBeDeleted->_left;
+			if (nodeToBeDeleted->_parent->_left == nodeToBeDeleted) {
+				nodeToBeDeleted->_parent->_left = x;
+			} else {
+				nodeToBeDeleted->_parent->_right = x;
+			}
+			x->_parent = nodeToBeDeleted->_parent;
+		} else {
+			y = nodeToBeDeleted->_right->_minimum();
+			originalColor = y->_color;
+			x = y->_right;
+			if (y->_parent == nodeToBeDeleted) {
+				x->_parent = y;
+			} else {
+				if (y->_parent->_left == y) {
+					y->_parent->_left = x;
+				} else {
+					y->_parent->_right = x;
+				}
+				x->_parent = y->_parent;
+			}
+			if (nodeToBeDeleted->_parent->_left == nodeToBeDeleted) {
+				nodeToBeDeleted->_parent->_left = y;
+			} else {
+				nodeToBeDeleted->_parent->_right = y;
+			}
+			y->_parent = nodeToBeDeleted->_parent;
+			_node_pointer tmp = position.base();
+			y->_color = tmp->_color;
+		}
+		// deleteFix
+		if (originalColor == BLACK) {
+			while (!_isRoot(x) && x->_color == BLACK) {
+				if (x->_parent->_left == x) {
+					_node_pointer w = x->_parent->_right;
+					if (w->_color == RED) {
+						w->_color = BLACK;
+						x->_parent->_color = RED;
+						_rotateLeft(x->_parent);
+						w = x->_parent->_right;
+					}
+					if (w->_left->_color == BLACK && w->_right->_color == BLACK) {
+						w->_color = BLACK;
+						x = x->_parent;
+					} else if (w->_right->_color == BLACK) {
+						w->_left->_color = BLACK;
+						w->_color = RED;
+						_rotateRight(w);
+						w = x->_parent->_right;
+					}
+					if (w->_right->_color == RED) {
+						w->_color = x->_parent->_color;
+						x->_parent->_color = BLACK;
+						w->_right->_color = BLACK;
+						_rotateLeft(x->_parent);
+						x = this->_end->_left;
+					}
+				} else {
+					_node_pointer w = x->_parent->_left;
+					if (w->_color == RED) {
+						w->_color = BLACK;
+						x->_parent->_color = RED;
+						_rotateLeft(x->_parent);
+						w = x->_parent->_left;
+					}
+					if (w->_right->_color == BLACK && w->_left->_color == BLACK) {
+						w->_color = BLACK;
+						x = x->_parent;
+					} else if (w->_left->_color == BLACK) {
+						w->_right->_color = BLACK;
+						w->_color = RED;
+						_rotateRight(w);
+						w = x->_parent->_left;
+					}
+					if (w->_left->_color == RED) {
+						w->_color = x->_parent->_color;
+						x->_parent->_color = BLACK;
+						w->_left->_color = BLACK;
+						_rotateLeft(x->_parent);
+						x = this->_end->_right;
+					}
+				}
+			}
+			x->_color = BLACK;
+		}
+		this->_alloc.destroy(position.base());
+		this->_alloc.deallocate(position.base(), 1);
 		this->_size -= 1;
 	}
 	size_type erase (const key_type& k) {
-		(void)k;
-		this->_size -= 1;
+		iterator it = this->find(k);
+		if (it == this->end()) {
+			return 0;
+		}
+		this->erase(it);
 		return 1;
 	}
 	void erase (iterator first, iterator last) {
+		if (first == this->begin() && last == this->end()) {
+			this->clear();
+			return;
+		}
 		while (first != last) {
 			this->erase(*first);
 			first++;
