@@ -58,6 +58,10 @@ struct _mapNode {
 		return x;
 	}
 
+	_valueType * _valPtr() {
+		return &this->_value;
+	}
+
 	static _nodePtr _nextNode(_nodePtr x) {
 		if (x->_right != NULL) {
 			x = x->_right;
@@ -198,7 +202,6 @@ protected:
 
 	_node_pointer _begin;
 	_node_pointer _end;
-	_node_pointer _nil;
 	_node_allocator _alloc;
 	key_compare _key_compare;
 	value_compare _value_compare;
@@ -374,6 +377,7 @@ public:
 	ft::pair<iterator,bool> insert (const value_type& val) {
 		_node_pointer parent = this->_searchPosition(val);
 		_node_pointer node;
+
 		if (parent == this->_end) {
 			node = this->_alloc.allocate(1);
 			this->_alloc.construct(node, val);
