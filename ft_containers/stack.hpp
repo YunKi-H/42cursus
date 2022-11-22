@@ -39,28 +39,22 @@ public:
 		return c.pop_back();
 	}
 
-	template <class _T, class C>
-	friend bool operator== (const stack<_T,C>& lhs, const stack<_T,C>& rhs) {
+	friend bool operator== (const stack& lhs, const stack& rhs) {
 		return lhs.c == rhs.c;
 	}
-	template <class _T, class C>
-	friend bool operator!= (const stack<_T,C>& lhs, const stack<_T,C>& rhs) {
+	friend bool operator!= (const stack& lhs, const stack& rhs) {
 		return lhs.c != rhs.c;
 	}
-	template <class _T, class C>
-	friend bool operator<  (const stack<_T,C>& lhs, const stack<_T,C>& rhs) {
+	friend bool operator<  (const stack& lhs, const stack& rhs) {
 		return lhs.c <  rhs.c;
 	}
-	template <class _T, class C>
-	friend bool operator<= (const stack<_T,C>& lhs, const stack<_T,C>& rhs) {
+	friend bool operator<= (const stack& lhs, const stack& rhs) {
 		return lhs.c <= rhs.c;
 	}
-	template <class _T, class C>
-	friend bool operator>  (const stack<_T,C>& lhs, const stack<_T,C>& rhs) {
+	friend bool operator>  (const stack& lhs, const stack& rhs) {
 		return lhs.c >  rhs.c;
 	}
-	template <class _T, class C>
-	friend bool operator>= (const stack<_T,C>& lhs, const stack<_T,C>& rhs) {
+	friend bool operator>= (const stack& lhs, const stack& rhs) {
 		return lhs.c >= rhs.c;
 	}
 
