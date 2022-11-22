@@ -99,14 +99,49 @@ public:
 	typedef value_type* pointer;
 	typedef value_type& reference;
 	typedef ft::_mapNode<value_type>* iterator_type;
+
 	typedef typename std::bidirectional_iterator_tag iterator_category;
-	typedef typename ft::iterator_traits<iterator_type>::value_type node_type;
 	typedef typename ft::iterator_traits<iterator_type>::difference_type difference_type;
+
+	typedef typename ft::iterator_traits<iterator_type>::value_type node_type;
 	typedef typename ft::iterator_traits<iterator_type>::pointer node_pointer;
 	typedef typename ft::iterator_traits<iterator_type>::reference node_reference;
 
 protected:
 	node_pointer _node;
+
+	void _increment() {
+		if (this->_node->_right != NULL) {
+			this->_node = this->_node->_right;
+			while (this->_node->_left != NULL) {
+				this->_node = this->_node->_left;
+			}
+		} else {
+			node_pointer y = this->_node->_parent;
+			while (this->_node == y->_right) {
+				this->_node = y;
+				y = y->_parent;
+			}
+			if (this->_node->_right != y) {
+				this->_node = y;
+			}
+		}
+	}
+	void _decrement() {
+		if (this->_node->_left != NULL) {
+			this->_node = this->_node->_left;
+			while (this->_node->_right != NULL) {
+				this->_node = this->_node->_right;
+			}
+		} else {
+			node_pointer y = this->_node->_parent;
+			while (this->_node == y->_left) {
+				this->_node = y;
+				y = y->_parent;
+			}
+			this->_node = y;
+		}
+	}
 
 public:
 	map_iterator() : _node() {}
@@ -122,15 +157,14 @@ public:
 		return lhs._node != rhs._node;
 	}
 	reference operator*() const {
-		// return *(&static_cast<_mapNode<T> >(_node)._value);
-		return _node->_value;
+		return *static_cast<node_pointer>(_node)->_valPtr();
 	}
 	pointer operator->() const {
-		// return &static_cast<_mapNode<T> >(_node)._value;
-		return &_node->_value;
+		return static_cast<node_pointer>(_node)->_valPtr();
 	}
 	map_iterator& operator++() {
-		this->_node = this->_node->_nextNode(this->_node);
+		// this->_node = this->_node->_nextNode(this->_node);
+		this->_increment();
 		return *this;
 	}
 	map_iterator operator++(int) {
@@ -139,7 +173,8 @@ public:
 		return temp;
 	}
 	map_iterator& operator--() {
-		this->_node = this->_node->_prevNode(this->_node);
+		// this->_node = this->_node->_prevNode(this->_node);
+		this->_decrement();
 		return *this;
 	}
 	map_iterator operator--(int) {
@@ -176,7 +211,6 @@ public:
 	class value_compare
 	: public std::binary_function<value_type,value_type,bool> {
 		friend class map<Key, T, Compare, Allocator>;
-		// friend class map;
 	protected:
 		Compare comp;
 		value_compare (Compare c) : comp(c) {}
@@ -197,7 +231,7 @@ public:
 
 protected:
 	typedef _mapNode<value_type> _node_type;
-	typedef _mapNode<value_type>* _node_pointer;
+	typedef _mapNode<value_type>* _node_pointer; // LinkType
 	typedef typename allocator_type::template rebind<_node_type>::other _node_allocator;
 
 	_node_pointer _begin;
@@ -206,6 +240,16 @@ protected:
 	key_compare _key_compare;
 	value_compare _value_compare;
 	size_type _size;
+
+	bool _isRoot(_node_pointer node) {
+		return node->_parent == this->_end;
+	}
+	bool _isLeftChild(_node_pointer node) {
+		return node->_parent->_left == node;
+	}
+	bool _isRightChild(_node_pointer node) {
+		return node->_parent->_right == node;
+	}
 
 	void _destructTree(_node_pointer node) {
 		if (node == NULL) {
@@ -217,48 +261,42 @@ protected:
 		this->_alloc.deallocate(node, 1);
 	}
 
-	bool _isRoot(_node_pointer node) {
-		return node->_parent == this->_end;
-	}
-
-	void _rotateRight(_node_pointer node) {
+	void _rotateLeft(_node_pointer node) {
 		_node_pointer y = node->_right;
+		node->_right = y->_left;
 		if (y->_left != NULL) {
 			y->_left->_parent = node;
-			node->_right = y->_left;
 			y->_left = NULL;
 		}
+		y->_parent = node->_parent;
 		if (this->_isRoot(node)) {
 			this->_end->_left = y;
 			y->_parent = this->_end;
 			node->_parent = NULL;
-		} else if (node->_parent->_left == node) {
+		} else if (_isLeftChild(node)) {
 			node->_parent->_left = y;
-			y->_parent = node->_parent;
 		} else {
 			node->_parent->_right = y;
-			y->_parent = node->_parent;
 		}
 		node->_parent = y;
 		y->_left = node;
 	}
-	void _rotateLeft(_node_pointer node) {
+	void _rotateRight(_node_pointer node) {
 		_node_pointer y = node->_left;
+		node->_left = y->_right;
 		if (y->_right != NULL) {
 			y->_right->_parent = node;
-			node->_left = y->_right;
 			y->_right = NULL;
 		}
+		y->_parent = node->_parent;
 		if (this->_isRoot(node)) {
 			this->_end->_right = y;
 			y->_parent = this->_end;
 			node->_parent = NULL;
-		} else if (node->_parent->_right == node) {
+		} else if (_isRightChild(node)) {
 			node->_parent->_right = y;
-			y->_parent = node->_parent;
 		} else {
 			node->_parent->_left = y;
-			y->_parent = node->_parent;
 		}
 		node->_parent = y;
 		y->_right = node;
@@ -371,23 +409,30 @@ public:
 
 	mapped_type& operator[] (const key_type& k) {
 		ft::pair<iterator, bool> tmp = this->insert(ft::make_pair(k, mapped_type()));
-		return (*tmp.first).second;
+		return (*(tmp.first)).second;
 	}
 
 	ft::pair<iterator,bool> insert (const value_type& val) {
 		_node_pointer parent = this->_searchPosition(val);
-		_node_pointer node;
+		_node_pointer node = NULL;
 
 		if (parent == this->_end) {
 			node = this->_alloc.allocate(1);
 			this->_alloc.construct(node, val);
-			this->_end->_left = node;
+			node->_color = BLACK;
 			node->_parent = this->_end;
+			this->_end->_left = node;
+
+			this->_begin = node;
 		} else if (_value_compare(val, parent->_value)) {
 			node = this->_alloc.allocate(1);
 			this->_alloc.construct(node, val);
 			node->_parent = parent;
 			parent->_left = node;
+
+			if (this->_begin == parent) {
+				this->_begin = node;
+			}
 		} else if (_value_compare(parent->_value, val)) {
 			node = this->_alloc.allocate(1);
 			this->_alloc.construct(node, val);
@@ -396,47 +441,50 @@ public:
 		} else {
 			return ft::make_pair(iterator(parent), false);
 		}
+		_node_pointer retNode = node;
 
 		// insertFix algorithm
-		_node_pointer grandParent;
+		_node_pointer grandParent = parent->_parent;
+		_node_pointer uncle = NULL;
 		while (node->_parent->_color == RED) {
-			if (node->_parent == node->_parent->_parent->_left) {
-				grandParent = node->_parent->_parent;
-				if (grandParent->_right->_color == RED) {
-					grandParent->_left->_color = BLACK;
-					grandParent->_right->_color = BLACK;
+			parent = node->_parent;
+			if (_isLeftChild(parent)) {
+				uncle = grandParent->_right;
+				if (uncle != NULL && uncle->_color == RED) {
+					uncle->_color = BLACK;
+					parent->_color = BLACK;
 					grandParent->_color = RED;
 					node = grandParent;
 				} else {
-					if (node == node->_parent->_right) {
-						node = node->_parent;
-						_rotateRight(node);
+					if (_isRightChild(node)) {
+						node = parent;
+						_rotateLeft(node);
 					}
-					node->_parent->_color = BLACK;
+					parent->_color = BLACK;
 					grandParent->_color = RED;
 					_rotateRight(grandParent);
 				}
 			} else {
-				grandParent = node->_parent->_parent;
-				if (grandParent->_left->_color == RED) {
-					grandParent->_right->_color = BLACK;
-					grandParent->_left->_color = BLACK;
+				uncle = grandParent->_left;
+				if (uncle != NULL && uncle->_color == RED) {
+					parent->_color = BLACK;
+					uncle->_color = BLACK;
 					grandParent->_color = RED;
 					node = grandParent;
 				} else {
-					if (node == node->_parent->_left) {
-						node = node->_parent;
+					if (_isLeftChild(node)) {
+						node = parent;
 						_rotateRight(node);
 					}
-					node->_parent->_color = BLACK;
+					parent->_color = BLACK;
 					grandParent->_color = RED;
-					_rotateRight(grandParent);
+					_rotateLeft(grandParent);
 				}
 			}
 			this->_end->_left->_color = BLACK;
 		}
 		this->_size += 1;
-		return ft::make_pair(iterator(node), true);
+		return ft::make_pair(iterator(retNode), true);
 	}
 	iterator insert (iterator position, const value_type& val) {
 		(void)position;
@@ -455,7 +503,7 @@ public:
 
 	void erase (iterator position) {
 		if (position == this->begin()) {
-			this->_begin = this->_begin->_nextNode();
+			this->_begin = this->_begin->_nextNode(this->_begin);
 		}
 
 		_node_pointer nodeToBeDeleted = position.base();
