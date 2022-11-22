@@ -528,28 +528,33 @@ public:
 			}
 			x->_parent = nodeToBeDeleted->_parent;
 		} else {
-			y = nodeToBeDeleted->_right->_minimum();
+			y = nodeToBeDeleted->_right->_minimum(nodeToBeDeleted->_right);
 			originalColor = y->_color;
 			x = y->_right;
 			if (y->_parent == nodeToBeDeleted) {
 				x->_parent = y;
 			} else {
+				std::cout <<"2\n";
 				if (y->_parent->_left == y) {
 					y->_parent->_left = x;
 				} else {
 					y->_parent->_right = x;
 				}
+				std::cout <<"22\n";
 				x->_parent = y->_parent;
 			}
+			std::cout <<"3\n";
 			if (nodeToBeDeleted->_parent->_left == nodeToBeDeleted) {
 				nodeToBeDeleted->_parent->_left = y;
 			} else {
 				nodeToBeDeleted->_parent->_right = y;
 			}
+			std::cout <<"4\n";
 			y->_parent = nodeToBeDeleted->_parent;
 			_node_pointer tmp = position.base();
 			y->_color = tmp->_color;
 		}
+
 		// deleteFix
 		if (originalColor == BLACK) {
 			while (!_isRoot(x) && x->_color == BLACK) {
@@ -623,7 +628,7 @@ public:
 			return;
 		}
 		while (first != last) {
-			this->erase(*first);
+			this->erase(first);
 			first++;
 		}
 	}
@@ -641,7 +646,7 @@ public:
 		this->_value_compare = x._value_compare;
 		this->_size = x._size;
 		x._begin = tmpBegin;
-		x.end = tmpEnd;
+		x._end = tmpEnd;
 		x._alloc = tmpAlloc;
 		x._key_compare = tmpKeyCompare;
 		x._value_compare = tmpValueCompare;
