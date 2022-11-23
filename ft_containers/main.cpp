@@ -1,12 +1,17 @@
 #include <iostream>
 #include <string>
 #include <deque>
+#include <algorithm>
+#include <sys/time.h>
 #if 0 //CREATE A REAL STL EXAMPLE
 	#include <map>
 	#include <stack>
 	#include <vector>
 	namespace ft = std;
 #else
+	#include <map>
+	#include <stack>
+	#include <vector>
 	#include <map.hpp>
 	#include <stack.hpp>
 	#include <vector.hpp>
@@ -112,5 +117,44 @@ int main(int argc, char** argv) {
 		std::cout << *it;
 	}
 	std::cout << std::endl;
+
+
+	// time test
+	ft::vector<int> v_ft;
+	struct timeval t1;
+	struct timeval t2;
+	gettimeofday(&t1, NULL);
+	for (int i = 0; i < 100000; i++) {
+		v_ft.push_back(rand());
+	}
+	gettimeofday(&t2, NULL);
+	size_t ft_vec_time = ( t2.tv_sec * 1000 + t2.tv_usec / 1000 ) - ( t1.tv_sec * 1000 + t1.tv_usec / 1000 );
+
+	std::vector<int> v_std;
+	gettimeofday(&t1, NULL);
+	for (int i = 0; i < 100000; i++) {
+		v_std.push_back(rand());
+	}
+	gettimeofday(&t2, NULL);
+	size_t std_vec_time = ( t2.tv_sec * 1000 + t2.tv_usec / 1000 ) - ( t1.tv_sec * 1000 + t1.tv_usec / 1000 );
+	std::cout << "ft_vector : " << ft_vec_time << " | std_vector : " << std_vec_time << std::endl;
+
+	ft::map<int, int> m_ft;
+	gettimeofday(&t1, NULL);
+	for (int i = 0; i < 100000; i++) {
+		m_ft.insert(ft::make_pair(rand(), rand()));
+	}
+	gettimeofday(&t2, NULL);
+	size_t ft_map_time = ( t2.tv_sec * 1000 + t2.tv_usec / 1000 ) - ( t1.tv_sec * 1000 + t1.tv_usec / 1000 );
+
+	std::map<int, int> m_std;
+	gettimeofday(&t1, NULL);
+	for (int i = 0; i < 100000; i++) {
+		m_std.insert(std::make_pair(rand(), rand()));
+	}
+	gettimeofday(&t2, NULL);
+	size_t std_map_time = ( t2.tv_sec * 1000 + t2.tv_usec / 1000 ) - ( t1.tv_sec * 1000 + t1.tv_usec / 1000 );
+	std::cout << "ft_map : " << ft_map_time << " | std_map : " << std_map_time << std::endl;
+
 	return (0);
 }
