@@ -22,8 +22,8 @@ services:
         #     - wordpress
         # volumes:
         #     - data:/var/www/html
-        networks:
-            - intra
+        # networks:
+        #     - intra
         restart: always
 
     # wordpress:
