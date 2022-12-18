@@ -1,36 +1,46 @@
-version: "3.0"
+version: "3"
 
-volumes:
-    data: {}
 services:
-    mariadb:
-        image: debian:buster
-        restart: always
-        expose:
-            - "3306"
-        networks:
-            - intra
-        tty: true
+    # mariadb:
+    #     image: mariadb
+    #     ports:
+    #         - 3306:3306
+    #     volumes:
+    #         - volume_mariadb
+    #     expose:
+    #         - "3306"
+    #     networks:
+    #         - intra
+    #     restart: always
+
     nginx:
-        image: debian:buster
-        restart: always
+        build: ./requirements/nginx/
+        image: nginx
         ports:
             - "443:443"
-        volumes:
-            - data:/var/www/html
+        # depends_on:
+        #     - wordpress
+        # volumes:
+        #     - data:/var/www/html
         networks:
             - intra
-        tty: true
-    wordpress:
-        image: debian:buster
         restart: always
-        volumes:
-            - data:/var/www/html
-        expose:
-            - "9000"
-        networks:
-            - intra
-        tty: true
+
+    # wordpress:
+    #     image: wordpress
+    #     volumes:
+    #         - volume_wordpress
+    #     expose:
+    #         - "9000"
+    #     networks:
+    #         - intra
+    #     restart: always
+
 networks:
     intra:
         driver: bridge
+
+# volumes:
+#     volume_mariadb:
+
+#     volume_wordpress:
