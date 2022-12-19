@@ -4,3 +4,6 @@
 [submodule "miniRT"]
 	path = miniRT
 	url = git@github.com:YunKi-H/miniRT.git
+[submodule "Inception"]
+	path = Inception
+	url = https://github.com/YunKi-H/Inception.git
